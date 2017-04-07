@@ -6,7 +6,7 @@
   "author": "Json Zhang",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --display-modules --display-chunks --config build/webpack.prod.config.js",
+    "build": "webpack --display-modules --display-chunks --config build/webpack.config.js",
     "dev": "node build/server.js"
   },
   "devDependencies": {

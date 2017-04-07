@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div v-for="n in [0,1,2]">ttt</div>
+	<div v-for="item in list">{{item.name}}</div>
 	<v-select v-model="selected" :options="['foo','bar']"></v-select>
 </div>
 </template>
@@ -9,7 +9,8 @@
         data () {
             return {
                 msg: 'Hello World!',
-				selected:"foo"
+				selected:"foo",
+				list:[{name:"Jack"},{name:"Kate"},{name:"Jim"}]
             }
         }
     }

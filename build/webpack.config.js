@@ -2,6 +2,7 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 
 //console.log(__dirname);
 
@@ -56,7 +57,21 @@ module.exports = {
 			}
         ]
     },
+	// .vue的配置。需要单独出来配置，其实没什么必要--因为我删了也没保错，不过这里就留这把，因为官网文档里是可以有单独的配置的。
+    // vue: {
+        // loaders: {
+            // css: 'style!css!autoprefixer',
+        // }
+    // },
     plugins: [
+		// 压缩代码
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
+		// 提取css为单文件
+		new ExtractTextPlugin("../[name].[contenthash].css"),
         new HtmlWebpackPlugin({
             filename: '../index.html',
             template: path.resolve(__dirname, '../app/index/index.html'),
