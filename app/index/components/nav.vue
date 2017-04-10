@@ -1,6 +1,5 @@
 <template>
 <div>
-	<nav-bar></nav-bar>
 	<div v-for="item in list">
 		{{item.name}} <button v-on:click="deleteItem(item)">删除</button>
 	</div>
@@ -11,7 +10,6 @@
 </div>
 </template>
 <script>
-    import navBar from './navBar.vue'
     export default {
         props:["mm"],
         data () {
@@ -25,10 +23,7 @@
             deleteItem:function(item){
                 this.list.splice(this.list.indexOf(item),1);
 			}
-		},
-        components:{
-            navBar:navBar
-        }
+		}
     }
 </script>
 <style>

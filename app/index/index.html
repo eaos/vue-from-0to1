@@ -8,7 +8,9 @@
     <body>
         <!-- vue的组件以自定义标签的形式使用 -->
         <div id="app">
-            <fav-list></fav-list>
+            <fav-list v-bind:mm="m"></fav-list>
+            <button v-on:click="pushUrl()">改变</button>
+            <router-view></router-view>
         </div>
     </body>
 </html>
