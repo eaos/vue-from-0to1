@@ -5,6 +5,8 @@ Vue.component('v-select', vSelect)
 
 new Vue({
     el: '#app',
-	render:rd=>rd(Favlist)
-    //components: { Favlist }
+	//render:rd=>rd(Favlist)
+    components:{
+        favList:Favlist
+    }
 })
