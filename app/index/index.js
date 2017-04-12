@@ -1,37 +1,30 @@
-import Vue from 'vue'
-import Favlist from './components/Favlist'
-import vSelect from 'vue-select'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-Vue.component('v-select', vSelect)
+import Vue from 'vue';
+import Favlist from './components/Favlist';
+import vSelect from 'vue-select';
+import VueRouter from 'vue-router';
+//import jQuery from 'jquery';
 
-const Foo = { template: '<div>foo {{$route.params.id}} <br/><router-view></router-view></div>',watch: {
-    '$route' (to, from) {
-        //console.log(from,to);
-    }
-}}
+/*引入路由*/
+import fooPost from "./components/foo/fooPosts.vue"
 
-const Bar = { template: '<div>bar {{$route.params.id}}<router-view></router-view></div>',watch: {
-    '$route' (to, from) {
-        //console.log(from,"to",to);
-    }
-}}
+Vue.use(VueRouter);
+Vue.component('v-select', vSelect);
 
-const Foo_Index = { template: '<div>foo_Index</div>'}
+/*Foo模块路由和子页面*/
+const Foo = { template: '<div>foo {{$route.params.id}} <br/><router-view></router-view></div>'};
+const Foo_Index = { template: '<div>foo_Index</div>'};
+const Foo_Profile = { template: '<div>foo_Profile</div>'};
+const Foo_Posts = fooPost;
 
-const Foo_Profile = { template: '<div>foo_Profile</div>'}
-
-const Foo_Posts = { template: '<div>foo_Posts</div>'}
-
-const Bar_Index = { template: '<div>bar_Index</div>'}
-
-const Bar_Profile = { template: '<div>bar_Profile</div>'}
-
-const Bar_Posts = { template: '<div>bar_Posts</div>'}
+/*Bar模块路由和子页面*/
+const Bar = { template: '<div>bar {{$route.params.id}}<router-view></router-view></div>'};
+const Bar_Index = { template: '<div>bar_Index</div>'};
+const Bar_Profile = { template: '<div>bar_Profile</div>'};
+const Bar_Posts = { template: '<div>bar_Posts</div>'};
 
 /*嵌套路由*/
 const routes = [
-    {   //name:"foo",/*有默认子路由的话，父路由的name得去掉*/
+    {   //name:"foo",/*有默认子路由(path为空)的话，父路由的name得去掉*/
         path: '/foo',
         component: Foo,
         children:[
@@ -48,7 +41,7 @@ const routes = [
         meta: {breadcrumbList: [ { label: '用户'}]}
     },
     {
-        //name:"bar",/*有默认子路由的话，父路由的name得去掉*/
+        //name:"bar",/*有默认子路由(path为空)的话，父路由的name得去掉*/
         path: '/bar',
         component: Bar,
         children:[
@@ -70,7 +63,7 @@ router.beforeEach(function (to, from, next) {
     /*可以在这里进行权限控制*/
     console.log(to);
     window.scrollTo(0, 0);
-    next();
+    next();/*必须这一步才能进入下个页面*/
 })
 
 router.afterEach(function (transition) {

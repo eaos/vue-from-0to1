@@ -43,7 +43,7 @@
 			},
             Mymm:function(v){
                 //console.log(this);
-                this.$emit("mchange",v);/*向外部发送广播*/
+                this.$emit("mchange",v);/*向外部发送广播,通知父级组建执行mchang关联的方法*/
             }
 		},
         components:{
