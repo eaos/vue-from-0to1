@@ -11,46 +11,53 @@ const Foo = { template: '<div>foo {{$route.params.id}} <br/><router-view></route
     }
 }}
 
-const Bar = { template: '<div>bar {{$route.params.id}}</div>',watch: {
+const Bar = { template: '<div>bar {{$route.params.id}}<router-view></router-view></div>',watch: {
     '$route' (to, from) {
         //console.log(from,"to",to);
     }
 }}
 
-const Foo_Index = { template: '<div>foo_Index</div>',watch: {
-    '$route' (to, from) {
-        //console.log(from,to);
-    }
-}}
+const Foo_Index = { template: '<div>foo_Index</div>'}
 
-const Foo_Profile = { template: '<div>foo_Profile</div>',watch: {
-    '$route' (to, from) {
-        //console.log(from,to);
-    }
-}}
+const Foo_Profile = { template: '<div>foo_Profile</div>'}
 
-const Foo_Posts = { template: '<div>foo_Posts</div>',watch: {
-    '$route' (to, from) {
-        //console.log(from,to);
-    }
-}}
+const Foo_Posts = { template: '<div>foo_Posts</div>'}
+
+const Bar_Index = { template: '<div>bar_Index</div>'}
+
+const Bar_Profile = { template: '<div>bar_Profile</div>'}
+
+const Bar_Posts = { template: '<div>bar_Posts</div>'}
 
 /*嵌套路由*/
 const routes = [
-    {   name:"foo",
-        path: '/foo', component: Foo,children:[
+    {   //name:"foo",/*有默认子路由的话，父路由的name得去掉*/
+        path: '/foo',
+        component: Foo,
+        children:[
             // UserHome will be rendered inside User's <router-view>
             // when /user/:id is matched
-            { path: '', component: Foo_Index,meta: { breadcrumbList: [ { label: '用户首页'}] }},
+            { name:"foo_index",path: '', component: Foo_Index,meta: { breadcrumbList: [ { label: '用户首页'}] }},
             // UserProfile will be rendered inside User's <router-view>
             // when /user/:id/profile is matched
-            { path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
+            { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
             // UserPosts will be rendered inside User's <router-view>
             // when /user/:id/posts is matched
-            { path: 'posts', component: Foo_Posts,meta: { breadcrumbList: [ { label: '用户登录'}] } }
-        ],meta: { breadcrumbList: [ { label: '用户'}] }
+            { name:"foo_posts",path: 'posts', component: Foo_Posts,meta: { breadcrumbList: [ { label: '用户登录'}] } }
+        ],
+        meta: {breadcrumbList: [ { label: '用户'}]}
     },
-    { path: '/bar/:id', component: Bar }
+    {
+        //name:"bar",/*有默认子路由的话，父路由的name得去掉*/
+        path: '/bar',
+        component: Bar,
+        children:[
+            { name:"bar_index",path: '', component: Bar_Index,meta: { breadcrumbList: [ { label: '用户首页'}] }},
+            { name:"bar_profile",path: 'profile', component: Bar_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
+            { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}] } }
+        ],
+        meta: {breadcrumbList: [ { label: '用户'}]}
+    }
 ]
 
 // 3. 创建 router 实例，然后传 `routes` 配置
@@ -59,20 +66,22 @@ const router = new VueRouter({
     routes: routes
 })
 
-/*router.beforeEach(function (transition) {
-    console.log(transition);
-    //window.scrollTo(0, 0);
-})*/
+router.beforeEach(function (to, from, next) {
+    /*可以在这里进行权限控制*/
+    console.log(to);
+    window.scrollTo(0, 0);
+    next();
+})
 
 router.afterEach(function (transition) {
-    console.log(transition);
+    //console.log(transition);
 })
 
 var vm = new Vue({
     el: '#app',
 	//render:rd=>rd(Favlist)
     data:{
-      m:""
+      m:"Hello World!"
     },
     components:{
         favList:Favlist,
@@ -83,9 +92,13 @@ var vm = new Vue({
         pushUrl:function(){
             router.push({ name: 'foo',params:{'id':112},query: { page: '1' }})
             /*等同于<router-link :to="{ name: 'foo', params: { id: 112 }}">User</router-link>*/
+        },
+        parentChange:function(v){
+            console.log(v);
+            this.m = v;
         }
     }
 });
 
 //console.log(vm)
-vm.m = 2;//可以通过props:[".."]传递给单文件组建
+//vm.m = "Hello World!";//可以通过props:[".."]传递给单文件组建

@@ -8,8 +8,10 @@
     <body>
         <!-- vue的组件以自定义标签的形式使用 -->
         <div id="app">
-            <fav-list v-bind:mm="m"></fav-list>
+            {{m}}
+            <input type="text" v-model="m">
             <button v-on:click="pushUrl()">改变</button>
+            <fav-list v-bind:mm="m" v-on:mchange="parentChange"></fav-list>
             <router-view></router-view>
         </div>
     </body>

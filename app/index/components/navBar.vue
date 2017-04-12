@@ -1,10 +1,10 @@
 <template>
 	<ul class="nav">
 		<li v-for="item in navList">
-			<router-link :to="{ path:item.path,params:{ id:item.param }}">{{item.name}}</router-link>
+			<router-link :to="{path:item.path}">{{item.name}}</router-link>
 			<ul v-if="item.children">
 				<li v-for="citem in item.children">
-					<router-link :to="{ path:citem.path,params:{ id:citem.param }}">{{citem.name}}</router-link>
+					<router-link :to="{path:citem.path}">{{citem.name}}</router-link>
 				</li>
 			</ul>
 		</li>
@@ -16,10 +16,10 @@
             return {
                 navList:[
                     {
-                        name:"nav-1",param:"",path:"/foo",children:[{name:"nav-1-1",param:"1",path:"/foo/1"}, {name:"nav-1-2",param:"2",path:"/foo/2"}]
+                        name:"foo",path:"/foo",children:[{name:"foo-1",path:"/foo/profile"}, {name:"foo-2",path:"/foo/posts"}]
                     },
                     {
-                        name:"nav-2",param:"",path:"/foo",children:[{name:"nav-2-1",param:"1",path:"/foo/1"}, {name:"nav-2-2",param:"2",path:"/foo/2"}]
+                        name:"bar",path:"/bar",children:[{name:"bar-1",path:"/bar/profile"}, {name:"bar-2",path:"/bar/posts"}]
                     }
                 ]
             }
