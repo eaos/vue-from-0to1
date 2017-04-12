@@ -10,6 +10,54 @@ import fooPost from "./components/foo/fooPosts.vue"
 Vue.use(VueRouter);
 Vue.component('v-select', vSelect);
 
+import valid from '../../src/directives/validform';
+//console.log(valid);
+Vue.directive('valid',valid);
+
+/*Vue.directive('valid',{
+    bind: function(el, binding){
+        var demo = $(el).Validform({
+            tiptype:"4",
+            //ajaxPost:true,
+            showAllError:true,
+            callback:function(){
+                (binding.value)()
+                return false;
+            },
+            ajaxurl:{
+                success:function(data,obj){
+                    //console.log(data);
+                }
+            }
+        });
+        //console.log('bind:',binding.value);
+    },
+    inserted: function(el, binding){
+        console.log('insert:',binding.value);
+    },
+    update: function(el, binding, vnode, oldVnode){
+        el.focus();
+        console.log(el.dataset.name);//这里的数据是可以动态绑定的
+        console.table({
+            name:binding.name,
+            value:binding.value,
+            oldValue:binding.oldValue,
+            expression:binding.expression,
+            arg:binding.arg,
+            modifiers:binding.modifiers,
+            vnode:vnode,
+            oldVnode:oldVnode
+        });
+    },
+    componentUpdated: function(el, binding){
+        console.log('componentUpdated:',binding.name);
+    },
+    unbind:function(){
+
+        console.log("unbind");
+    }
+});*/
+
 /*Foo模块路由和子页面*/
 const Foo = { template: '<div>foo {{$route.params.id}} <br/><router-view></router-view></div>'};
 const Foo_Index = { template: '<div>foo_Index</div>'};
