@@ -1,18 +1,22 @@
 import Vue from 'vue';
 import Favlist from './components/Favlist';
-import vSelect from 'vue-select';
-import VueRouter from 'vue-router';
 //import jQuery from 'jquery';
 
-/*引入路由*/
+/*引入路由组件文件*/
 import fooPost from "./components/foo/fooPosts.vue"
 
+/*使用路由*/
+import VueRouter from 'vue-router';
 Vue.use(VueRouter);
+
+/*引入组件*/
+import vSelect from 'vue-select';
 Vue.component('v-select', vSelect);
 
+/*自定义指令*/
 import valid from '../../src/directives/validform';
-//console.log(valid);
 Vue.directive('valid',valid);
+//console.log(valid);
 
 /*Vue.directive('valid',{
     bind: function(el, binding){
@@ -107,17 +111,20 @@ const router = new VueRouter({
     routes: routes
 })
 
-router.beforeEach(function (to, from, next) {
+/*进入页面之前*/
+router.beforeEach(function (to, from, next){
     /*可以在这里进行权限控制*/
     console.log(to);
     window.scrollTo(0, 0);
     next();/*必须这一步才能进入下个页面*/
 })
 
+/*进入页面之后*/
 router.afterEach(function (transition) {
     //console.log(transition);
 })
 
+/*实例化Vue*/
 var vm = new Vue({
     el: '#app',
 	//render:rd=>rd(Favlist)

@@ -1,11 +1,19 @@
 <template>
 <div>
 	<form id="form" v-valid="{'fun':submit,'data':list}" >
-		<p><input type="text" v-model="num" datatype="n2-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
-		<p><input type="text" v-model="em" datatype="e" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
+		<p><input type="text" id="mobile" name="mobile" v-model="info.num" datatype="n2-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
+		<p><input type="text" v-model="info.em" datatype="e" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
+		<p>验证，单选需要value和name</p>
+		<p><input type="radio" value="1" name="sex" v-model="info.picked" datatype="*1-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "><label>One</label></p>
+		<p><input type="radio" value="2" name="sex" v-model="info.picked" datatype="*1-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "><label>Two</label></p>
+		<p><span>Picked: {{ info.picked }}</span></p>
+		<p>验证，复选框不需要value,需要name</p>
+		<p><input type="checkbox" name="checks" v-model="info.check.color" datatype="*1-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "><label>One</label></p>
+		<p><input type="checkbox" name="checks" v-model="info.check.font" datatype="*1-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "><label>Two</label></p>
+		<p><span>Picked: {{ info.check }}</span></p>
 		<button type="submit">提交</button>
 	</form>
-	{{num}}
+	{{info.num}}
 </div>
 </template>
 <script>
@@ -15,11 +23,34 @@
     export default {
         data () {
             return {
-                num:1,
-				em:"111@qq.com",
+				info:{
+                    num:1,
+                    em:"111@qq.com",
+                    picked:"",
+					check:{
+                        color:"",
+						font:""
+					}
+				},
 				list:[]
             }
         },
+        created:function(){//created||beforeRouteEnter 一般在这里进行页面载入之前预加载数据
+            $.ajax({
+                url:"post",
+                type:"POST",
+                dataType:"json",
+                data:'{"code":"GetScore","msg":"","id":"123"}',
+                success:function(data){
+
+                },
+                error:function(){
+                    console.log("error");
+                    alert("页面数据拉取失败");
+                    //_this.list = ["123"];
+                }
+            });
+		},
         mounted () {/*以前的ready*/
            /* console.log($);
             var _this = this;

@@ -31,12 +31,12 @@
                 this.list.splice(this.list.indexOf(item),1);
 			}
 		},
-        computed: {
+        computed: {/*用于简单的数据监听响应,输出结果*/
             reverseMM: function(){
                 return this.Mymm.split("").reverse().join("");
             }
         },
-        watch:{
+        watch:{/*用于较复杂的数据监听响应，异步数据*/
             mm:function(v){
                 console.log(v);
                 this.Mymm = v;
