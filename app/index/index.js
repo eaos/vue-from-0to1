@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import Vue from 'vue/dist/vue.min';
 import Favlist from './components/Favlist';
-//import jQuery from 'jquery';
+import jQuery from 'jquery';
 
 /*引入路由组件文件*/
 import fooPost from "./components/foo/fooPosts.vue"
@@ -12,11 +12,6 @@ Vue.use(VueRouter);
 /*引入组件*/
 import vSelect from 'vue-select';
 Vue.component('v-select', vSelect);
-
-/*自定义指令*/
-import valid from '../../src/directives/validform';
-Vue.directive('valid',valid);
-//console.log(valid);
 
 /*Vue.directive('valid',{
     bind: function(el, binding){
