@@ -3,14 +3,16 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
-
 //console.log(__dirname);
+//var production        = process.env.NODE_ENV === 'production';// production environment
+//var domain            = process.env.DOMAIN; // your domain process.env.domain
 
 module.exports = {
     //devtool: 'cheap-module-source-map',
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
-		index:['webpack-hot-middleware/client', path.resolve(__dirname, '../app/index/index.js')],
+		index:[path.resolve(__dirname, '../app/index/index.js')],//'webpack-hot-middleware/client',
+        //valid:[path.resolve(__dirname, '../src/validform.min.js')],
 		 // 需要被提取为公共模块的群组
         vendors:['vue','jquery']
 	},
@@ -19,8 +21,8 @@ module.exports = {
         // 输出路径是 myProject/output/static
         path: path.resolve(__dirname, '../output/static'),
         publicPath: 'static/',
-        filename: '[name].[hash].js',
-        chunkFilename: '[id].[chunkhash].js'
+        filename: '[name].[hash].js'
+        //chunkFilename: '[id].[chunkhash].js'
     },
     resolve: {
         extensions: ['.js', '.vue'],
@@ -62,14 +64,16 @@ module.exports = {
     plugins: [
 		// 压缩代码
 		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
+           // sourceMap: true,
+            compress: {
+                warnings: false
+            }
 		}),
         new HtmlWebpackPlugin({
             filename: '../index.html',
             template: path.resolve(__dirname, '../app/index/index.html'),
             inject: true,
+            hash:false,
 			minify: {
 			removeComments: true,
 			collapseWhitespace: true,

@@ -10,13 +10,25 @@ config.plugins = [
     new webpack.ProvidePlugin({
         $: "jquery", jQuery: "jquery", "window.jQuery": "jquery"
     }),
+    /*new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: '"production"'
+        }
+    }),*/
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        //sourceMap: true,
+        compress: {
+            warnings: false
+        }
+    }),
     new HtmlWebpackPlugin({
-        filename: 'app/index/index.html',
+        filename: 'index.html',//app/index/index.html
         template: path.resolve(__dirname, '../app/index/index.html'),
         inject: true,
-		minify: {
+        //hash:false,
+        minify: {
 			removeComments: true,
 			collapseWhitespace: true,
 			removeAttributeQuotes: true
