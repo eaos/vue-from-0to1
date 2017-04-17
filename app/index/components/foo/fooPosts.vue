@@ -21,6 +21,9 @@
     import validForm from '../../../../src/validform.min';
     import valid from '../../../../src/directives/validform';
     Vue.directive('valid',valid);
+    //console.log(valid);
+    //console.log(jQuery);
+    //console.log(validForm);
     export default {
         data () {
             return {
@@ -36,7 +39,15 @@
 				list:[]
             }
         },
+        beforeRouteEnter:function(to,from,next){
+            console.log("beforeRouteEnter",this);
+            next(vm=>{/*this不能访问实例对象，只能通过next的vm*/
+                console.log(vm);
+                vm.info.num = 2333;
+            });
+        },
         created:function(){//created||beforeRouteEnter 一般在这里进行页面载入之前预加载数据
+		 console.log("created",this.info);
             $.ajax({
                 url:"post",
                 type:"POST",
@@ -53,8 +64,8 @@
             });
 		},
         mounted () {/*以前的ready*/
-           /* console.log($);
-            var _this = this;
+          console.log("mounted",this);
+			/*  var _this = this;
             var demo = $("#form").Validform({
                 tiptype:"4",
                 //ajaxPost:true,

@@ -1,6 +1,6 @@
-import Vue from 'vue/dist/vue.min';
+import Vue from 'vue';
 import Favlist from './components/Favlist';
-import jQuery from 'jquery';
+//import jQuery from 'jquery';
 
 /*引入路由组件文件*/
 import fooPost from "./components/foo/fooPosts.vue"
@@ -8,6 +8,13 @@ import fooPost from "./components/foo/fooPosts.vue"
 /*使用路由*/
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
+
+//import validForm from '../../src/validform.min';
+//import valid from '../../src/directives/validform';
+//Vue.directive('valid',valid);
+//console.log(valid);
+//console.log(jQuery);
+//console.log(validForm);
 
 /*引入组件*/
 import vSelect from 'vue-select';
