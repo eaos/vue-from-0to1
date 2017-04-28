@@ -12,7 +12,9 @@
             <input type="text" v-model="m">
             <button v-on:click="pushUrl()">改变ccc</button>
             <fav-list v-bind:mm="m" v-on:mchange="parentChange"></fav-list>
-            <router-view></router-view>
+            <transition :name="transitionName">
+                <router-view class="child-view"></router-view>
+            </transition>
         </div>
     </body>
 </html>
