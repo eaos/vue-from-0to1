@@ -16,7 +16,7 @@ export default {
             }
         });
       console.log("指令=======Start");
-        console.log('bind:',binding);
+      console.log('bind:',binding);
     },
     inserted: function(el, binding){
         console.log('insert:',binding.value);

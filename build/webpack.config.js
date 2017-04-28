@@ -12,9 +12,8 @@ module.exports = {
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
 		index:[path.resolve(__dirname, '../app/index/index.js')],//'webpack-hot-middleware/client',
-        //valid:[path.resolve(__dirname, '../src/validform.min.js')],
-		 // 需要被提取为公共模块的群组
-        vendors:['vue','jquery']
+        test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/validform.js')],
+        vendors:['vue','vue-router','jquery'] /*需要被提取为公共模块的群组*/
 	},
     // 输出配置
     output: {
@@ -27,7 +26,7 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue'],
 		alias: {
-			'vue$':'vue/dist/vue.js',
+			'vue$':'vue/dist/vue.esm.js',
             'jquery':'jquery/dist/jquery.min.js'
 		}
     },
@@ -43,7 +42,7 @@ module.exports = {
                 loader: 'babel-loader?presets=es2015',
                 exclude: /node_modules/
             },
-			// 使用css-loader和style-loader 加载 .css 结尾的文件
+			//使用css-loader和style-loader 加载 .css 结尾的文件
             {
                 test: /\.css$/,
                 // 将样式抽取出来为独立的文件
@@ -62,13 +61,25 @@ module.exports = {
         ]
     },
     plugins: [
-		// 压缩代码
-		new webpack.optimize.UglifyJsPlugin({
-           // sourceMap: true,
+        new webpack.ProvidePlugin({/*导出为全局变量*/
+            $: "jquery", jQuery: "jquery", "window.jQuery": "jquery"
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+           names: ['index','vendors','test']
+        }),
+        new webpack.DefinePlugin({
+         'process.env': {
+         NODE_ENV: '"production"'
+         }
+         }),
+        //new webpack.HotModuleReplacementPlugin(),
+        //new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            //sourceMap: true,
             compress: {
                 warnings: false
             }
-		}),
+        }),
         new HtmlWebpackPlugin({
             filename: '../index.html',
             template: path.resolve(__dirname, '../app/index/index.html'),

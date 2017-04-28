@@ -18,12 +18,11 @@
 </template>
 <script>
     import Vue from 'vue';
-    import validForm from '../../../../src/validform.min';
+    //import validForm from '../../../../src/validform';
     import valid from '../../../../src/directives/validform';
     Vue.directive('valid',valid);
-    //console.log(valid);
-    //console.log(jQuery);
-    //console.log(validForm);
+   /* import axios from 'axios';
+    Vue.use(axios);*/
     export default {
         data () {
             return {
@@ -48,7 +47,22 @@
         },
         created:function(){//created||beforeRouteEnter 一般在这里进行页面载入之前预加载数据
 		 console.log("created",this.info);
-            $.ajax({
+            this.$http.post("/user",{"code":"GetScore","msg":"","id":"123"}).then(function(data){
+                console.info(data);
+            },function(response){
+                console.info(response);
+                console.log("error");
+                alert("页面数据拉取失败");
+            });
+            /*axios.post('/user', {
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            }).then(function (response) {
+				console.log(response);
+			}).catch(function (error) {
+				console.log(error);
+			});*/
+            /*$.ajax({
                 url:"post",
                 type:"POST",
                 dataType:"json",
@@ -61,7 +75,7 @@
                     alert("页面数据拉取失败");
                     //_this.list = ["123"];
                 }
-            });
+            });*/
 		},
         mounted () {/*以前的ready*/
           console.log("mounted",this);

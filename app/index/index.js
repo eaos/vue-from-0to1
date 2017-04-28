@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import Favlist from './components/Favlist';
-//import jQuery from 'jquery';
-
 /*引入路由组件文件*/
 import fooPost from "./components/foo/fooPosts.vue"
-
 /*使用路由*/
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
-
-//import validForm from '../../src/validform.min';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+Vue.use(VueAxios,axios);
+//import validForm from '../../src/validform';
 //import valid from '../../src/directives/validform';
 //Vue.directive('valid',valid);
 //console.log(valid);

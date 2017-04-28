@@ -7,35 +7,57 @@ var config = require('./webpack.config');
 
 config.output.publicPath = '/';
 config.plugins = [
-    new webpack.ProvidePlugin({
+    new webpack.ProvidePlugin({/*导出为全局变量*/
         $: "jquery", jQuery: "jquery", "window.jQuery": "jquery"
     }),
-    /*new webpack.DefinePlugin({
+    new webpack.optimize.CommonsChunkPlugin({
+        names: ['index','vendors','test']
+    }),
+    new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: '"production"'
+            NODE_ENV: '"development"'
         }
-    }),*/
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
+    }),
+   /* new webpack.optimize.UglifyJsPlugin({
         //sourceMap: true,
         compress: {
             warnings: false
         }
-    }),
+    }),*/
+    new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: path.resolve(__dirname, '../app/index/index.html'),
+        inject: true,
+        hash:false,
+        minify: {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeAttributeQuotes: true
+            // more options:
+            // https://github.com/kangax/html-minifier#options-quick-reference
+        }
+    })
+];
+/*config.plugins.push(
     new HtmlWebpackPlugin({
         filename: 'index.html',//app/index/index.html
         template: path.resolve(__dirname, '../app/index/index.html'),
         inject: true,
         //hash:false,
-        minify: {
-			removeComments: true,
-			collapseWhitespace: true,
-			removeAttributeQuotes: true
-			// more options:
-			// https://github.com/kangax/html-minifier#options-quick-reference
-		}
+        //minify: {
+           // removeComments: true,
+            //collapseWhitespace: true,
+            //removeAttributeQuotes: true
+            // more options:
+            // https://github.com/kangax/html-minifier#options-quick-reference
+        //}
     })
-];
-
+);
+config.plugins.push(
+    new webpack.DefinePlugin({
+        'process.env': {
+            NODE_ENV: '"development"'
+        }
+    })
+);*/
 module.exports = config;
