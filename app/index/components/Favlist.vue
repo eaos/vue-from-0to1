@@ -1,6 +1,6 @@
 <template>
 <div>
-	<nav-bar></nav-bar>
+	<nav-bar v-bind:pmst="permission"></nav-bar>
 	<div v-for="item in list">
 		{{item.name}} <button v-on:click="deleteItem(item)">删除</button>
 	</div>
@@ -17,13 +17,14 @@
 <script>
     import navBar from './navBar.vue'
     export default {
-        props:["mm"],
+        props:["mm","pms"],
         data () {
             return {
                 num:1,
 				selected:"foo",
 				list:[{name:"Jack"},{name:"Kate"},{name:"Jim"}],
-				Mymm:this.mm/*子组件接收到的数据不能跟父组件双向绑定*/
+				Mymm:this.mm,/*子组件接收到的数据不能跟父组件双向绑定*/
+                permission:this.pms
             }
         },
 		methods:{

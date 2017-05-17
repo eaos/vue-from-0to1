@@ -4,6 +4,22 @@ import Favlist from './components/Favlist';
 import fooPost from "./components/foo/fooPosts.vue"
 /*使用路由*/
 import VueRouter from 'vue-router';
+
+/*
+// 增强原方法，好处是旧的业务模块不需要任何变动
+VueRouter.prototype.go = function () {
+    this.isBack = true
+    window.history.go(-1)
+};
+
+// 或者你可以新建一个方法
+VueRouter.prototype.goBack = function () {
+    this.isBack = true
+    this.go(-1)
+};
+*/
+
+
 Vue.use(VueRouter);
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -83,7 +99,7 @@ const routes = [
         children:[
             // UserHome will be rendered inside User's <router-view>
             // when /user/:id is matched
-            { name:"foo_index",path: '', component: Foo_Index,meta: { breadcrumbList: [ { label: '用户首页'}] }},
+            { name:"foo_index",path: '', component: Foo_Index,meta:{ breadcrumbList: [ { label: '用户首页'}],permission:"add"}},
             // UserProfile will be rendered inside User's <router-view>
             // when /user/:id/profile is matched
             { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
@@ -116,21 +132,32 @@ const router = new VueRouter({
 router.beforeEach(function (to, from, next){
     /*可以在这里进行权限控制*/
     console.log(to);
+    if(["edit","delete","add"].indexOf(to.meta.permission)!=-1){
+        next();/*必须这一步才能进入下个页面*/
+    }else{
+        //next("/foo");
+        alert("暂无权限访问此页面！");
+    }
     window.scrollTo(0, 0);
-    next();/*必须这一步才能进入下个页面*/
 })
 
 /*进入页面之后*/
 router.afterEach(function (transition) {
     //console.log(transition);
-})
+});
+
+import permission from '../../src/directives/permission';
+Vue.directive('permission',permission);
+
 
 /*实例化Vue*/
 var vm = new Vue({
     el: '#app',
 	//render:rd=>rd(Favlist)
     data:{
-      m:"Hello World!"
+        m:"Hello World!",
+        transitionName:"slide",
+        permission:["edit","delete"]
     },
     components:{
         favList:Favlist,
@@ -145,8 +172,31 @@ var vm = new Vue({
         parentChange:function(v){
             console.log(v);
             this.m = v;
+        },
+        updatePms:function(f){
+            if(f){
+                this.permission.push("add");
+            }else{
+                this.permission.splice(this.permission.indexOf("add"),1);
+                router.push({name:"foo_index"})
+            }
+        },
+        hasPermission:function(c){
+            if(this.permission.indexOf(c)>-1){
+                return true;
+            }else{
+                return false;
+            }
         }
-    }
+    }/*,
+    watch: {
+        '$route' (to, from) {
+            const toDepth = to.path.split('/').length;
+            const fromDepth = from.path.split('/').length;
+            console.log(to,from);
+            this.transitionName = toDepth < fromDepth ? 'slide' : 'slide-back'
+        }
+    }*/
 });
 
 //console.log(vm)

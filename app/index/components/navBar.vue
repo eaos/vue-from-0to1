@@ -1,29 +1,43 @@
 <template>
 	<ul class="nav">
-		<li v-for="item in navList">
+		<li v-for="item in navList" v-if="hasPermission(item.permission)">
 			<router-link :to="{path:item.path}">{{item.name}}</router-link>
 			<ul v-if="item.children">
-				<li v-for="citem in item.children">
+				<li v-for="citem in item.children" v-if="hasPermission(citem.permission)">
 					<router-link :to="{path:citem.path}">{{citem.name}}</router-link>
 				</li>
 			</ul>
 		</li>
+		<!--<button v-permission="['delete',permission]">无权限</button>
+		<button v-permission="['edit',permission]">有编辑权限</button>-->
 	</ul>
 </template>
 <script>
+    //import permission from '../../../src/directives/permission';
     export default {
+        props:['pmst'],
         data () {
             return {
                 navList:[
                     {
-                        name:"foo",path:"/foo",children:[{name:"foo-1",path:"/foo/profile"}, {name:"foo-2",path:"/foo/posts"}]
+                        name:"foo",path:"/foo",permission:"edit",children:[{name:"foo-1",path:"/foo/profile",permission:"add"}, {name:"foo-2",path:"/foo/posts",permission:"edit"}]
                     },
                     {
-                        name:"bar",path:"/bar",children:[{name:"bar-1",path:"/bar/profile"}, {name:"bar-2",path:"/bar/posts"}]
+                        name:"bar",path:"/bar",permission:"edit",children:[{name:"bar-1",path:"/bar/profile",permission:"edit"}, {name:"bar-2",path:"/bar/posts",permission:"edit"}]
                     }
-                ]
+                ],
+                permission:this.pmst
             }
-        }
+        },
+		methods:{
+            hasPermission:function(c){
+                if(this.permission.indexOf(c)>-1){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+		}
     }
 </script>
 <style>

@@ -53,6 +53,7 @@
                 console.info(response);
                 console.log("error");
                 alert("页面数据拉取失败");
+				console.log("页面数据拉取失败");
             });
             /*axios.post('/user', {
                 firstName: 'Fred',
