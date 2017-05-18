@@ -20,10 +20,10 @@
             return {
                 navList:[
                     {
-                        name:"foo",path:"/foo",permission:"edit",children:[{name:"foo-1",path:"/foo/profile",permission:"add"}, {name:"foo-2",path:"/foo/posts",permission:"edit"}]
+                        name:"foo",path:"/foo",permission:"custom",children:[{name:"foo-1",path:"/foo/profile",permission:"add"}, {name:"foo-2",path:"/foo/posts",permission:"custom"}]
                     },
                     {
-                        name:"bar",path:"/bar",permission:"edit",children:[{name:"bar-1",path:"/bar/profile",permission:"edit"}, {name:"bar-2",path:"/bar/posts",permission:"edit"}]
+                        name:"bar",path:"/bar",permission:"custom",children:[{name:"bar-1",path:"/bar/profile",permission:"custom"}, {name:"bar-2",path:"/bar/posts",permission:"add"}]
                     }
                 ],
                 permission:this.pmst

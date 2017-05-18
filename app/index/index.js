@@ -91,6 +91,8 @@ const Bar_Index = { template: '<div>bar_Index</div>'};
 const Bar_Profile = { template: '<div>bar_Profile</div>'};
 const Bar_Posts = { template: '<div>bar_Posts</div>'};
 
+const Page403 = { template: '<div>403 无权限访问此页面！</div>'};
+
 /*嵌套路由*/
 const routes = [
     {   //name:"foo",/*有默认子路由(path为空)的话，父路由的name得去掉*/
@@ -99,26 +101,32 @@ const routes = [
         children:[
             // UserHome will be rendered inside User's <router-view>
             // when /user/:id is matched
-            { name:"foo_index",path: '', component: Foo_Index,meta:{ breadcrumbList: [ { label: '用户首页'}],permission:"add"}},
+            { name:"foo_index",path: '', component: Foo_Index,meta:{ breadcrumbList: [ { label: '用户首页'}],permission:"add",title:"用户首页"}},
             // UserProfile will be rendered inside User's <router-view>
             // when /user/:id/profile is matched
-            { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
+            { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"用户资料",permission:"custom"}},
             // UserPosts will be rendered inside User's <router-view>
             // when /user/:id/posts is matched
-            { name:"foo_posts",path: 'posts', component: Foo_Posts,meta: { breadcrumbList: [ { label: '用户登录'}] } }
+            { name:"foo_posts",path: 'posts', component: Foo_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"用户登录",permission:"custom"}}
         ],
-        meta: {breadcrumbList: [ { label: '用户'}]}
+        meta: {breadcrumbList: [ { label: '用户'}],title:"用户",permission:"custom"}
     },
     {
         //name:"bar",/*有默认子路由(path为空)的话，父路由的name得去掉*/
         path: '/bar',
         component: Bar,
         children:[
-            { name:"bar_index",path: '', component: Bar_Index,meta: { breadcrumbList: [ { label: '用户首页'}] }},
-            { name:"bar_profile",path: 'profile', component: Bar_Profile,meta: { breadcrumbList: [ { label: '用户资料'}] }},
-            { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}] } }
+            { name:"bar_index",path: '', component: Bar_Index,meta: { breadcrumbList: [ { label: '用户首页'}],permission:"add",title:"Bar 用户首页"}},
+            { name:"bar_profile",path: 'profile', component: Bar_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"Bar 用户资料",permission:"custom"}},
+            { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"Bar 用户登录",permission:"custom"} }
         ],
-        meta: {breadcrumbList: [ { label: '用户'}]}
+        meta:{breadcrumbList: [ { label: '用户'}],title:"bar 用户",permission:"custom"}
+    },
+    {
+        name:"403",
+        path: '/403',
+        component: Page403,
+        meta: {breadcrumbList:[ { label: '403页面'}],permission:"custom",title:"403 禁止访问"}
     }
 ]
 
@@ -126,24 +134,30 @@ const routes = [
 // 你还可以传别的配置参数, 不过先这么简单着吧。
 const router = new VueRouter({
     routes: routes
-})
+});
+
+/*模拟设置权限 保存到sessionStorage*/
+window.sessionStorage.setItem("permission",["edit","delete",'custom']);
+Vue.prototype.permission = (window.sessionStorage.getItem("permission")).split(",");
+
 
 /*进入页面之前*/
-router.beforeEach(function (to, from, next){
+router.beforeEach(function(to, from, next){
     /*可以在这里进行权限控制*/
-    console.log(to);
-    if(["edit","delete","add"].indexOf(to.meta.permission)!=-1){
+    console.log(Vue.prototype.permission);
+    if(Vue.prototype.permission.indexOf(to.meta.permission)!=-1){
         next();/*必须这一步才能进入下个页面*/
     }else{
-        //next("/foo");
-        alert("暂无权限访问此页面！");
+        next("/403");
+        //alert("暂无权限访问此页面！");
     }
-    window.scrollTo(0, 0);
-})
+    window.scrollTo(0,0);
+});
 
 /*进入页面之后*/
 router.afterEach(function (transition) {
-    //console.log(transition);
+    console.log(transition.meta.title);
+    window.document.title = transition.meta.title;
 });
 
 import permission from '../../src/directives/permission';
@@ -156,8 +170,8 @@ var vm = new Vue({
 	//render:rd=>rd(Favlist)
     data:{
         m:"Hello World!",
-        transitionName:"slide",
-        permission:["edit","delete"]
+        transitionName:"slides",
+        permission:Vue.prototype.permission
     },
     components:{
         favList:Favlist,
