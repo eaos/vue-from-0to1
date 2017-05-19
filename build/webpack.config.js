@@ -11,7 +11,7 @@ module.exports = {
     //devtool: 'cheap-module-source-map',
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
-		index:[path.resolve(__dirname, '../app/index/index.js')],//'webpack-hot-middleware/client',
+		index:[path.resolve(__dirname, '../app/index.js')],//'webpack-hot-middleware/client',
         test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/validform.js')],
         vendors:['vue','vue-router','jquery'] /*需要被提取为公共模块的群组*/
 	},
@@ -82,7 +82,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: '../index.html',
-            template: path.resolve(__dirname, '../app/index/index.html'),
+            template: path.resolve(__dirname, '../app/index.html'),
             inject: true,
             hash:false,
 			minify: {

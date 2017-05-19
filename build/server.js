@@ -26,11 +26,11 @@ app.use(devMiddleware)
 // 注册中间件
 app.use(hotMiddleware)
 
-// 监听 8888端口，开启服务器
-app.listen(8888, function (err) {
+// 监听 8889端口，开启服务器
+app.listen(8889, function (err) {
     if (err) {
         console.log(err)
         return
     }
-    console.log('Listening at http://localhost:8888')
+    console.log('Listening at http://localhost:8889')
 })

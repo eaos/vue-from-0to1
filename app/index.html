@@ -5,71 +5,10 @@
         <meta charset="utf-8">
         <title>首页</title>
     </head>
-    <style>
-        html,body{ overflow-x: hidden;}
-        .slide-enter-active, .slide-leave-active {
-             animation:fold-in 1s ease 0s;
-         }
-        .slide-enter, .slide-leave-active {
-            animation: fold-out 1s ease 0s;
-        }
-
-        .slide-back-enter-active, .slide-back-leave-active {
-            animation:fold-back-out 1s ease 0s;
-        }
-        .slide-back-enter, .slide-back-leave-active {
-            animation:fold-back-in 1s ease 0s;
-        }
-
-        @keyframes fold-in {
-            0% {
-                transform: translate3d(100%, 0, 0);
-            }
-            100% {
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        @keyframes fold-out {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-            100% {
-                transform: translate3d(-100%,0 , 0);
-            }
-        }
-
-        @keyframes fold-back-in {
-            0% {
-                transform: translate3d(-100%, 0, 0);
-            }
-            100% {
-                transform: translate3d(0, 0, 0);
-            }
-        }
-        @keyframes fold-back-out {
-            0% {
-                transform: translate3d(0, 0, 0);
-            }
-            100% {
-                transform: translate3d(100%,0 , 0);
-            }
-        }
-
-    </style>
     <body>
-        <!-- vue的组件以自定义标签的形式使用 -->
         <div id="app">
-            {{m}}
-            <input type="text" v-model="m">
-            <button v-on:click="pushUrl()">改变ccc</button>
-            <fav-list v-bind:mm="m" v-on:mchange="parentChange" :pms="permission"></fav-list>
-            <!--<button v-permission="['add',permission]">无权限</button>
-            <button v-permission="['edit',permission]" v-on:click="updatePms()">有编辑权限</button>-->
-            <button v-if="hasPermission('add')" v-on:click="updatePms(false)">无权限</button>
-            <button v-if="hasPermission('edit')" v-on:click="updatePms(true)">有编辑权限</button>
-            <transition :name="transitionName">
-                <router-view></router-view>
-            </transition>
+            <nav-bar v-bind:pmst="permission"></nav-bar>
+            <router-view></router-view>
         </div>
     </body>
 </html>

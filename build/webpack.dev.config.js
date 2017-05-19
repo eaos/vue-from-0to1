@@ -26,7 +26,7 @@ config.plugins = [
     }),*/
     new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: path.resolve(__dirname, '../app/index/index.html'),
+        template: path.resolve(__dirname, '../app/index.html'),
         inject: true,
         hash:false,
         minify: {

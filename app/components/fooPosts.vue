@@ -19,7 +19,7 @@
 <script>
     import Vue from 'vue';
     //import validForm from '../../../../src/validform';
-    import valid from '../../../../src/directives/validform';
+    import valid from '../../src/directives/validform';
     Vue.directive('valid',valid);
    /* import axios from 'axios';
     Vue.use(axios);*/
