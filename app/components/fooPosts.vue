@@ -21,8 +21,6 @@
     //import validForm from '../../../../src/validform';
     import valid from '../../src/directives/validform';
     Vue.directive('valid',valid);
-   /* import axios from 'axios';
-    Vue.use(axios);*/
     export default {
         data () {
             return {

@@ -7,7 +7,7 @@ Vue.use(VueAxios,axios);
 Vue.use(VueRouter);
 
 /*模拟设置权限 保存到sessionStorage*/
-window.sessionStorage.setItem("permission",["edit","delete",'custom',"add"]);
+window.sessionStorage.setItem("permission",["edit","delete",'custom']);
 Vue.prototype.permission = (window.sessionStorage.getItem("permission")).split(",");
 
 import routes from '../src/config/routes'

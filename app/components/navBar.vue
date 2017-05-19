@@ -23,7 +23,7 @@
                         name:"foo",path:"/foo",permission:"custom",children:[{name:"foo-1",path:"/foo/profile",permission:"add"}, {name:"foo-2",path:"/foo/posts",permission:"custom"}]
                     },
                     {
-                        name:"bar",path:"/bar",permission:"custom",children:[{name:"bar-1",path:"/bar/profile",permission:"custom"}, {name:"bar-2",path:"/bar/posts",permission:"add"}]
+                        name:"bar",path:"/bar",permission:"custom",children:[{name:"bar-1",path:"/bar/profile",permission:"add"}, {name:"bar-2",path:"/bar/posts",permission:"custom"}]
                     }
                 ],
                 permission:this.pmst

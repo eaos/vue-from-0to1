@@ -30,10 +30,10 @@ const routes = [
         children:[
             // UserHome will be rendered inside User's <router-view>
             // when /user/:id is matched
-            { name:"foo_index",path: '', component: Foo_Index,meta:{ breadcrumbList: [ { label: '用户首页'}],permission:"add",title:"用户首页"}},
+            { name:"foo_index",path: '', component: Foo_Index,meta:{ breadcrumbList: [ { label: '用户首页'}],permission:"custom",title:"用户首页"}},
             // UserProfile will be rendered inside User's <router-view>
             // when /user/:id/profile is matched
-            { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"用户资料",permission:"custom"}},
+            { name:"foo_profile",path: 'profile', component: Foo_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"用户资料",permission:"add"}},
             // UserPosts will be rendered inside User's <router-view>
             // when /user/:id/posts is matched
             { name:"foo_posts",path: 'posts', component: Foo_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"用户登录",permission:"custom"}}
@@ -45,8 +45,8 @@ const routes = [
         path: '/bar',
         component: Bar,
         children:[
-            { name:"bar_index",path: '', component: Bar_Index,meta: { breadcrumbList: [ { label: '用户首页'}],permission:"add",title:"Bar 用户首页"}},
-            { name:"bar_profile",path: 'profile', component: Bar_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"Bar 用户资料",permission:"custom"}},
+            { name:"bar_index",path: '', component: Bar_Index,meta: { breadcrumbList: [ { label: '用户首页'}],permission:"custom",title:"Bar 用户首页"}},
+            { name:"bar_profile",path: 'profile', component: Bar_Profile,meta: { breadcrumbList: [ { label: '用户资料'}],title:"Bar 用户资料",permission:"add"}},
             { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"Bar 用户登录",permission:"custom"} }
         ],
         meta:{breadcrumbList: [ { label: '用户'}],title:"bar 用户",permission:"custom"}
