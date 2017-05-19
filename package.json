@@ -24,6 +24,7 @@
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.2.0",
+	"vue-router": "",
     "vue-style-loader": "^1.0.0",
     "webpack": "^2.3.3",
     "webpack-dev-middleware": "^1.10.1",
