@@ -24,6 +24,7 @@ config.plugins = [
             warnings: false
         }
     }),*/
+    new ExtractTextPlugin("app.css?[hash]"),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, '../app/index.html'),

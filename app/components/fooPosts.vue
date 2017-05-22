@@ -116,8 +116,3 @@
 		}
     }
 </script>
-<style>
-    html{
-        background: #fff;
-    }
-</style>

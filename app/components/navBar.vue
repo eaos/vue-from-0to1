@@ -1,16 +1,29 @@
 <template>
-	<ul class="nav">
-		<li v-for="item in navList" v-if="hasPermission(item.permission)">
-			<router-link :to="{path:item.path}">{{item.name}}</router-link>
-			<ul v-if="item.children">
-				<li v-for="citem in item.children" v-if="hasPermission(citem.permission)">
-					<router-link :to="{path:citem.path}">{{citem.name}}</router-link>
-				</li>
-			</ul>
-		</li>
-		<!--<button v-permission="['delete',permission]">无权限</button>
-		<button v-permission="['edit',permission]">有编辑权限</button>-->
-	</ul>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<router-link class="navbar-brand" :to="{path:'/'}">Brand</router-link>
+			</div>
+			<div class="collapse navbar-collapse" id="menu">
+				<ul class="nav navbar-nav">
+					<li v-for="item in navList" class="dropdown" v-if="hasPermission(item.permission)">
+						<router-link :to="{path:item.path}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{item.name}} <span class="caret"></span></router-link>
+						<ul v-if="item.children" class="dropdown-menu">
+							<li v-for="citem in item.children" v-if="hasPermission(citem.permission)">
+								<router-link :to="{path:citem.path}">{{citem.name}}</router-link>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 </template>
 <script>
     //import permission from '../../../src/directives/permission';
@@ -41,5 +54,5 @@
     }
 </script>
 <style>
-	.nav [class$="active"]{ color: #ff8800; } /*class属性以active结尾*/
+	.nav [class$="active"]{ color: #ff8800 !important; background: #f5f5f5} /*class属性以active结尾*/
 </style>

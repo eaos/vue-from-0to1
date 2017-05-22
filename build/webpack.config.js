@@ -12,7 +12,7 @@ module.exports = {
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
 		index:[path.resolve(__dirname, '../app/index.js')],//'webpack-hot-middleware/client',
-        test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/validform.js')],
+        test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/validform.js'),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
         vendors:['vue','vue-router','jquery'] /*需要被提取为公共模块的群组*/
 	},
     // 输出配置
@@ -35,7 +35,21 @@ module.exports = {
             // 使用vue-loader 加载 .vue 结尾的文件
             {
                 test: /\.vue$/, 
-                loader: 'vue-loader'   
+                loader: 'vue-loader',
+                options: {
+                    //https://github.com/ai/browserslist
+                    postcss: [require('autoprefixer')({
+                        browsers: ['last 2 versions']
+                    })],
+                    loaders: {
+                        css: ExtractTextPlugin.extract({
+                            use: ['css-loader'],
+                            fallback: 'vue-style-loader'
+                        })
+                        //....scss less sass more
+                    },
+                    sourceMap:true
+                }
             },
             {
                 test: /\.js$/,
@@ -49,15 +63,30 @@ module.exports = {
                 loader: ExtractTextPlugin.extract({fallback:'style-loader',use:'css-loader'}),
                 exclude: /node_modules/
             },
+            {
+                test: /\.(scss|sass)$/,
+                loader: ExtractTextPlugin.extract({use: [
+                    'style-loader',
+                    'css-loader',
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ]}),
+                exclude: /node_modules/
+            },
 			// 加载图片
 			{
 				test: /\.(png|jpg|gif|svg)$/,
-				loader: 'url',
-				query: {
-					limit: 10000,
-					name: '[name].[ext]?[hash:7]'
-				}
-			}
+				loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
+			},
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]?[hash]'
+                }
+            }
         ]
     },
     plugins: [
@@ -71,9 +100,8 @@ module.exports = {
          'process.env': {
          NODE_ENV: '"production"'
          }
-         }),
-        //new webpack.HotModuleReplacementPlugin(),
-        //new webpack.NoEmitOnErrorsPlugin(),
+        }),
+        new ExtractTextPlugin("app.css?[hash]"),
         new webpack.optimize.UglifyJsPlugin({
             //sourceMap: true,
             compress: {

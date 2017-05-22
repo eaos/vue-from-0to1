@@ -1,0 +1,35 @@
+@charset "utf-8";
+@function hovercolor ($color, $amount ) {
+	@if $is-light == true {
+		@return lighten($color, $amount)
+	}	@else	{
+		@return darken($color, $amount)
+	}
+}
+
+/* 定义media-queries的最小最大宽度 */
+@mixin screen($res-min, $res-max){
+  @media screen and ( min-width: $res-min ) and ( max-width: $res-max ){
+    @content;
+  }
+}
+
+
+/* 定义animation的keyframes */
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-ms-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}

@@ -1,0 +1,9 @@
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    margin: 0;
+    /*background: url("../images/logo.png") no-repeat 0 0;*/
+}

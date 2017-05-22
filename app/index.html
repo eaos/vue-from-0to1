@@ -7,8 +7,9 @@
     </head>
     <body>
         <div id="app">
-            <nav-bar v-bind:pmst="permission"></nav-bar>
+            <app-header :pms="permission"></app-header>
             <router-view></router-view>
+            <app-footer></app-footer>
         </div>
     </body>
 </html>

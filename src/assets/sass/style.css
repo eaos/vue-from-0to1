@@ -1,0 +1,59 @@
+/*
+Error: File to import not found or unreadable: compass/css3.
+        on line 4 of style.scss
+
+1: @charset "utf-8";
+2: @import "include/config.scss";
+3: 
+4: @import "compass/css3";
+5: @import "blueprint/colors";
+6: @import "compass/support";
+7: @import "compass/css3/box";
+8: @import "compass/reset";
+9: 
+
+Backtrace:
+style.scss:4
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:67:in `rescue in import'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:45:in `import'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:28:in `imported_file'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/import_node.rb:37:in `css_import?'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:311:in `visit_import'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/stack.rb:79:in `block in with_base'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/stack.rb:115:in `with_frame'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/stack.rb:79:in `with_base'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:158:in `visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `map'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/base.rb:36:in `visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:157:in `visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/visitors/perform.rb:8:in `visit'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/root_node.rb:36:in `css_tree'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/engine.rb:378:in `_render_with_sourcemap'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/engine.rb:295:in `render_with_sourcemap'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:209:in `each'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/plugin.rb:82:in `update_stylesheets'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/exec/sass_scss.rb:364:in `watch_or_update'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/exec/sass_scss.rb:51:in `process_result'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/exec/base.rb:52:in `parse'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/lib/sass/exec/base.rb:19:in `parse!'
+d:/Ruby21/lib/ruby/gems/2.1.0/gems/sass-3.4.16/bin/scss:13:in `<top (required)>'
+d:/Ruby21/bin/scss:23:in `load'
+d:/Ruby21/bin/scss:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: compass/css3.\A         on line 4 of style.scss\A \A 1: @charset \"utf-8\";\A 2: @import \"include/config.scss\";\A 3: \A 4: @import \"compass/css3\";\A 5: @import \"blueprint/colors\";\A 6: @import \"compass/support\";\A 7: @import \"compass/css3/box\";\A 8: @import \"compass/reset\";\A 9: "; }

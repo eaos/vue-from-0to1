@@ -1,9 +1,11 @@
 <template>
 <div>
 	APP
+	<button v-on:click="changePms()" class="btn btn-default">权限添加</button>
 </div>
 </template>
 <script>
+	/*import '../../src/assets/sass/style.scss'*/
     export default {
         props:["mm","pms"],
         data () {
@@ -17,7 +19,11 @@
 		methods:{
             deleteItem:function(item){
                 this.list.splice(this.list.indexOf(item),1);
-			}
+			},
+            changePms:function(){
+                this.permission.push("add");
+                window.sessionStorage.setItem("permission",this.permission);
+            }
 		},
         computed: {/*用于简单的数据监听响应,输出结果*/
             reverseMM: function(){
@@ -40,4 +46,8 @@
     html{
         background: #fff;
     }
+	body{
+		color: #333;
+	}
+	a{ color: #333;}
 </style>
