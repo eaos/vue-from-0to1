@@ -54,5 +54,5 @@
     }
 </script>
 <style>
-	.nav [class$="active"]{ color: #ff8800 !important; background: #f5f5f5} /*class属性以active结尾*/
+	.nav [class$="active"]{ color: #ff8800 !important; background: #fff} /*class属性以active结尾*/
 </style>

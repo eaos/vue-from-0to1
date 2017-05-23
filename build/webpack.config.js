@@ -20,7 +20,7 @@ module.exports = {
         // 输出路径是 myProject/output/static
         path: path.resolve(__dirname, '../output/static'),
         publicPath: 'static/',
-        filename: '[name].[hash].js'
+        filename: '[name].js?[hash]'
         //chunkFilename: '[id].[chunkhash].js'
     },
     resolve: {

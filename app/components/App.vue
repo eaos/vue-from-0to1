@@ -22,6 +22,7 @@
 			},
             changePms:function(){
                 this.permission.push("add");
+                console.log(this.permission);
                 window.sessionStorage.setItem("permission",this.permission);
             }
 		},
