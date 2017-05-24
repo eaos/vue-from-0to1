@@ -6,12 +6,12 @@ Vue.use(VueAxios,axios);
 Vue.use(VueRouter);
 
 /*模拟设置权限 保存到sessionStorage*/
-window.sessionStorage.setItem("permission",["edit","delete",'custom']);
+window.sessionStorage.setItem("permission",["edit","delete",'custom','haha']);
 Vue.prototype.permission = (window.sessionStorage.getItem("permission")).split(",");
 
 import routes from '../src/config/routes'
 const router = new VueRouter({
-   // linkActiveClass: 'active',
+   // linkActiveClass: 'active',/*设置当前链接的class*/
     routes: routes
 });
 
@@ -41,11 +41,6 @@ var vm = new Vue({
     el: '#app',
 	//render:rd=>rd(App),
     router:router,
-    data:function(){
-      return {
-          permission:Vue.prototype.permission
-      }
-    },
     components:{
         appHeader,
         appFooter

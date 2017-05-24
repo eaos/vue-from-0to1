@@ -8,7 +8,7 @@ var webpack = require('webpack');
 //var domain            = process.env.DOMAIN; // your domain process.env.domain
 
 module.exports = {
-    //devtool: 'cheap-module-source-map',
+    devtool: 'source-map',
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
 		index:[path.resolve(__dirname, '../app/index.js')],//'webpack-hot-middleware/client',
@@ -17,7 +17,7 @@ module.exports = {
 	},
     // 输出配置
     output: {
-        // 输出路径是 myProject/output/static
+        //输出路径是 myProject/output/static
         path: path.resolve(__dirname, '../output/static'),
         publicPath: 'static/',
         filename: '[name].js?[hash]'
@@ -35,21 +35,7 @@ module.exports = {
             // 使用vue-loader 加载 .vue 结尾的文件
             {
                 test: /\.vue$/, 
-                loader: 'vue-loader',
-                options: {
-                    //https://github.com/ai/browserslist
-                    postcss: [require('autoprefixer')({
-                        browsers: ['last 2 versions']
-                    })],
-                    loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: ['css-loader'],
-                            fallback: 'vue-style-loader'
-                        })
-                        //....scss less sass more
-                    },
-                    sourceMap:true
-                }
+                loader: 'vue-loader'
             },
             {
                 test: /\.js$/,
@@ -64,12 +50,11 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(scss|sass)$/,
-                loader: ExtractTextPlugin.extract({use: [
-                    'style-loader',
-                    'css-loader',
-                    { loader: 'sass-loader', options: { sourceMap: true } }
-                ]}),
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                }),
                 exclude: /node_modules/
             },
 			// 加载图片
@@ -101,7 +86,7 @@ module.exports = {
          NODE_ENV: '"production"'
          }
         }),
-        new ExtractTextPlugin("app.css?[hash]"),
+        new ExtractTextPlugin('app.css?[hash]'),/*{ filename:'app.css?[hash]',allChunks: true }*/
         new webpack.optimize.UglifyJsPlugin({
             //sourceMap: true,
             compress: {

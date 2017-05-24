@@ -1,30 +1,44 @@
 <template>
 <div>
-	<nav-bar v-bind:pmst="permission"></nav-bar>
-	<div v-for="item in list">
-		{{item.name}} <button v-on:click="deleteItem(item)">删除</button>
+	<div class="row">
+		<div class="col-lg-12">
+			<ul>
+				<li v-for="item in list">
+					{{item.name}} <button v-on:click="deleteItem(item)">删除</button>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<router-link to="/foo">Go to Foo</router-link>
-	<router-link to="/bar">Go to Bar</router-link>
-	<div><input type="number" v-model="num">{{num}}</div>
-	<v-select v-model="selected" :options="['foo','bar']"></v-select>
-	<div><input type="text" v-model="Mymm"> {{Mymm}}</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<router-link to="/foo">Go to Foo</router-link>
+			<router-link to="/bar">Go to Bar</router-link>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<input type="number" v-model="num">{{num}}
+		</div>
+	</div>
+
+	<div>Mymm：<input type="text" v-model="Mymm"> {{Mymm}}</div>
 	<div>子组件接收到的数据不能跟父组件双向绑定</div>
-	<!--<div><input type="text" v-model="mm"> {{mm}} </div>-->
-	<div>{{reverseMM}}</div>
+	<div>mm：<input type="text" v-model="mm"> {{mm}} (直接修改mm会报错)</div>
+	<div>用于简单的数据监听响应(Mymm计算后的结果)：{{reverseMM}}</div>
 </div>
 </template>
 <script>
     import navBar from './navBar.vue'
     export default {
-        props:["mm","pms"],
+        props:["mm"],
         data () {
             return {
                 num:1,
 				selected:"foo",
 				list:[{name:"Jack"},{name:"Kate"},{name:"Jim"}],
 				Mymm:this.mm,/*子组件接收到的数据不能跟父组件双向绑定*/
-                permission:this.pms
             }
         },
 		methods:{
@@ -43,7 +57,7 @@
                 this.Mymm = v;
 			},
             Mymm:function(v){
-                //console.log(this);
+                console.log(this);
                 this.$emit("mchange",v);/*向外部发送广播,通知父级组建执行mchang关联的方法*/
             }
 		},

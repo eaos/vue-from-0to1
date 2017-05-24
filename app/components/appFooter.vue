@@ -13,6 +13,3 @@
 		methods:{}
     }
 </script>
-<style>
-	.footer{ text-align: center; margin-top: 10px;}
-</style>

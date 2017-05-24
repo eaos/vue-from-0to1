@@ -1,54 +1,42 @@
 <template>
-<div>
-	APP
-	<button v-on:click="changePms()" class="btn btn-default">权限添加</button>
+<div class="container">
+	<h2 class="text-center">欢迎界面</h2>
+	<h3>父组件里面的text:<input type="text" v-model="text">{{text}}</h3>
+	<fav-list v-bind:mm="text" v-on:mchange="mchangeFromChild"></fav-list>
+	<button @click="changePermission()" class="btn btn-default">权限添加</button>
+	<ul class="tree">
+		<tree v-for="item in info.list" v-bind:model="item" v-bind:key="item.onlyId"></tree>
+	</ul>
 </div>
 </template>
 <script>
-	/*import '../../src/assets/sass/style.scss'*/
+	import '../../src/assets/sass/style.scss'
+	import favList from  "./Favlist";
+    import tree from  "./tree";
     export default {
-        props:["mm","pms"],
         data () {
+            console.log(this,this.permission);
             return {
                 num:1,
 				selected:"foo",
 				list:[{name:"Jack"},{name:"Kate"},{name:"Jim"}],
-				Mymm:this.mm,/*子组件接收到的数据不能跟父组件双向绑定*/
+				text:"Hello world!",/*子组件接收到的数据不能跟父组件双向绑定*/
+                info:{"list":[{"onlyId":"patientManage","name":"患者库","item":[{"onlyId":"patientAccount","name":"患者管理","item":[{"onlyId":"editPatient","name":"修改患者资料","item":null,"checked":true},{"onlyId":"addPatient","name":"增加患者","item":null,"checked":true},{"onlyId":"deletePatient","name":"删除患者","item":null,"checked":true},{"onlyId":"viewPatient","name":"查看患者资料","item":null,"checked":true}],"checked":true}],"checked":true}]}
             }
         },
 		methods:{
-            deleteItem:function(item){
-                this.list.splice(this.list.indexOf(item),1);
-			},
-            changePms:function(){
+            changePermission:function(){
                 this.permission.push("add");
                 console.log(this.permission);
                 window.sessionStorage.setItem("permission",this.permission);
-            }
+            },
+            mchangeFromChild(v){
+                this.text = v;
+			}
 		},
-        computed: {/*用于简单的数据监听响应,输出结果*/
-            reverseMM: function(){
-                return this.Mymm.split("").reverse().join("");
-            }
-        },
-        watch:{/*用于较复杂的数据监听响应，异步数据*/
-            mm:function(v){
-                console.log(v);
-                this.Mymm = v;
-			},
-            Mymm:function(v){
-                //console.log(this);
-                this.$emit("mchange",v);/*向外部发送广播,通知父级组建执行mchang关联的方法*/
-            }
+		components:{
+            favList,
+            tree
 		}
     }
 </script>
-<style>
-    html{
-        background: #fff;
-    }
-	body{
-		color: #333;
-	}
-	a{ color: #333;}
-</style>

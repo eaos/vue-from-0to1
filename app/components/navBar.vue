@@ -26,9 +26,7 @@
 	</nav>
 </template>
 <script>
-    //import permission from '../../../src/directives/permission';
     export default {
-        props:['pmst'],
         data () {
             return {
                 navList:[
@@ -39,7 +37,7 @@
                         name:"bar",path:"/bar",permission:"custom",children:[{name:"bar-1",path:"/bar/profile",permission:"add"}, {name:"bar-2",path:"/bar/posts",permission:"custom"}]
                     }
                 ],
-                permission:this.pmst
+                permission:this.permission
             }
         },
 		methods:{
@@ -53,6 +51,3 @@
 		}
     }
 </script>
-<style>
-	.nav [class$="active"]{ color: #ff8800 !important; background: #fff} /*class属性以active结尾*/
-</style>

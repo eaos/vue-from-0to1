@@ -6,7 +6,7 @@
   "author": "Json Zhang",
   "license": "ISC",
   "scripts": {
-    "build": "webpack --display-modules --display-chunks --config build/webpack.config.js",
+    "build": "webpack --display-modules --display-chunks --config build/webpack.config.js && gulp minifyCss",/*build生成的路径有问题这里使用gulp替换掉*/
     "dev": "node build/server.js"
   },
   "devDependencies": {
@@ -20,9 +20,15 @@
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.11.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "",
+    "gulp-replace": "^0.5.4",
     "html-webpack-plugin": "^2.28.0",
     "jquery": "^3.2.1",
     "node-sass": "",
+    "run-sequence": "^1.2.2",
     "sass-loader": "^5.0.1",
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.0.0",

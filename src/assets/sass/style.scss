@@ -1,3 +1,7 @@
-.ft12{
-  color: red;
+@charset "utf-8";
+@import "bootstrap.scss";
+.nav [class$="active"]{ color: #ff8800 !important; background: #fff} /*class属性以active结尾*/
+.footer{ text-align: center; margin-top: 10px; background: url(../images/logo.png);}
+.tree{
+  ul{ margin-left: 30px; padding-left: 0;}
 }
