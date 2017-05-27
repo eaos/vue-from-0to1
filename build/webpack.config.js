@@ -4,11 +4,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 //console.log(__dirname);
-//var production        = process.env.NODE_ENV === 'production';// production environment
-//var domain            = process.env.DOMAIN; // your domain process.env.domain
 
 module.exports = {
-    devtool: 'source-map',
+    //devtool: 'source-map',
     // 入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
 		index:[path.resolve(__dirname, '../app/index.js')],//'webpack-hot-middleware/client',
@@ -32,20 +30,25 @@ module.exports = {
     },
     module: {
         loaders: [
-            // 使用vue-loader 加载 .vue 结尾的文件
             {
                 test: /\.vue$/, 
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        css: ExtractTextPlugin.extract({
+                            use: 'css-loader',
+                            fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+                        })
+                    }
+                }
             },
             {
                 test: /\.js$/,
                 loader: 'babel-loader?presets=es2015',
                 exclude: /node_modules/
             },
-			//使用css-loader和style-loader 加载 .css 结尾的文件
             {
                 test: /\.css$/,
-                // 将样式抽取出来为独立的文件
                 loader: ExtractTextPlugin.extract({fallback:'style-loader',use:'css-loader'}),
                 exclude: /node_modules/
             },
@@ -53,11 +56,22 @@ module.exports = {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: ['css-loader', 'sass-loader']
+                    use: [
+                        { loader: 'css-loader', options: { sourceMap:true } },
+                        { loader: 'sass-loader', options: { sourceMap:true } },
+                        { loader: 'postcss-loader',options: {
+                        // 如果没有options这个选项将会报错 No PostCSS Config found
+                        plugins: (loader) => [
+                            //require('postcss-scss')(),
+                            //require('postcss-import')({root: loader.resourcePath}),
+                            require('autoprefixer')(), //CSS浏览器兼容
+                            //require('cssnano')()  //压缩css
+                        ],
+                            sourceMap:true
+                    } }]
                 }),
                 exclude: /node_modules/
             },
-			// 加载图片
 			{
 				test: /\.(png|jpg|gif|svg)$/,
 				loader: 'file-loader',
@@ -82,11 +96,27 @@ module.exports = {
            names: ['index','vendors','test']
         }),
         new webpack.DefinePlugin({
-         'process.env': {
-         NODE_ENV: '"production"'
-         }
+            'process.env': {
+                NODE_ENV: '"production"'
+            }
         }),
-        new ExtractTextPlugin('app.css?[hash]'),/*{ filename:'app.css?[hash]',allChunks: true }*/
+        /* new webpack.LoaderOptionsPlugin({
+             //minimize: true
+         }),*/
+        /*new webpack.LoaderOptionsPlugin({
+            test: /\.vue$/,
+            options: {
+                vue: {
+                    loaders: {
+                        css: ExtractTextPlugin.extract({
+                            fallback: 'vue-style-loader',
+                            use: 'css-loader'
+                        }),
+                    }
+                }
+            }
+        }),*/
+        new ExtractTextPlugin({ filename:'app.css?[hash]',allChunks: true }),/*{ filename:'app.css?[hash]',allChunks: true }*/
         new webpack.optimize.UglifyJsPlugin({
             //sourceMap: true,
             compress: {

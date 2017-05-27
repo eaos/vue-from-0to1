@@ -3,10 +3,13 @@
 	<h2 class="text-center">欢迎界面</h2>
 	<h3>父组件里面的text:<input type="text" v-model="text">{{text}}</h3>
 	<fav-list v-bind:mm="text" v-on:mchange="mchangeFromChild"></fav-list>
-	<button @click="changePermission()" class="btn btn-default">权限添加</button>
+	<a @click="changePermission()" class="btn btn-primary">权限添加</a>
 	<ul class="tree">
 		<tree v-for="item in info.list" v-bind:model="item" v-bind:key="item.onlyId"></tree>
 	</ul>
+	<div class="box-center-v" style="height: 100px; width:200px; border: 1px solid #ddd;">
+		<span>center</span>
+	</div>
 </div>
 </template>
 <script>
@@ -40,3 +43,7 @@
 		}
     }
 </script>
+<style>
+	.container{ background: #f5f5f5;}
+	.wrap{ font-size: 1rem;}
+</style>

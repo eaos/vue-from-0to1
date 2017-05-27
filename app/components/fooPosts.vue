@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container">
 	<form id="form" v-valid="{'fun':submit,'data':list}" >
 		<p><input type="text" id="mobile" name="mobile" v-model="info.num" datatype="n2-20" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
 		<p><input type="text" v-model="info.em" datatype="e" nullmsg="请填写姓名！" errormsg="姓名格式不对！" sucmsg=" "></p>
@@ -50,7 +50,7 @@
             },function(response){
                 console.info(response);
                 console.log("error");
-                alert("页面数据拉取失败");
+                //alert("页面数据拉取失败");
 				console.log("页面数据拉取失败");
             });
             /*axios.post('/user', {
@@ -116,3 +116,6 @@
 		}
     }
 </script>
+<style scoped>
+	.container{ font-size:13px;}
+</style>

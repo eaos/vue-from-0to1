@@ -18,13 +18,20 @@ config.plugins = [
             NODE_ENV: '"development"'
         }
     }),
-   /* new webpack.optimize.UglifyJsPlugin({
-        //sourceMap: true,
-        compress: {
-            warnings: false
+   /* new webpack.LoaderOptionsPlugin({
+        test: /\.vue$/,
+        options: {
+            vue: {
+                loaders: {
+                    css: ExtractTextPlugin.extract({
+                        fallback: 'vue-style-loader',
+                        use: 'css-loader'
+                    }),
+                }
+            }
         }
     }),*/
-    new ExtractTextPlugin('app.css?[hash]'),/*{ filename:'app.css?[hash]',allChunks: true }*/
+    new ExtractTextPlugin({ filename:'app.css?[hash]',allChunks: true }),/*{ filename:'app.css?[hash]',allChunks: true }*/
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, '../app/index.html'),
@@ -39,26 +46,4 @@ config.plugins = [
         }
     })
 ];
-/*config.plugins.push(
-    new HtmlWebpackPlugin({
-        filename: 'index.html',//app/index/index.html
-        template: path.resolve(__dirname, '../app/index/index.html'),
-        inject: true,
-        //hash:false,
-        //minify: {
-           // removeComments: true,
-            //collapseWhitespace: true,
-            //removeAttributeQuotes: true
-            // more options:
-            // https://github.com/kangax/html-minifier#options-quick-reference
-        //}
-    })
-);
-config.plugins.push(
-    new webpack.DefinePlugin({
-        'process.env': {
-            NODE_ENV: '"development"'
-        }
-    })
-);*/
 module.exports = config;

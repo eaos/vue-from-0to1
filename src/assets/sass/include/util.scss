@@ -33,3 +33,31 @@
     @content;
   }
 }
+
+@mixin max-screen($res){
+  @media only screen and ( max-width: $res ) {
+    @content;
+  }
+}
+@mixin min-screen($res){
+  @media only screen and ( min-width: $res ) {
+    @content;
+  }
+}
+@mixin min-max-screen($min, $max){
+  @media only screen and ( min-width: $min ) and ( max-width: $max ) {
+    @content;
+  }
+}
+@mixin clearfix { &:after { content:"."; display:block; height:0; clear:both; visibility:hidden;} }
+
+@mixin box-center-v {
+  display:box;
+  display:-webkit-box;
+  box-orient:vertical;
+  box-pack: center;
+  box-align: center;
+  -webkit-box-orient:vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
