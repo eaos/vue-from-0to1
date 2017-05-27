@@ -103,7 +103,7 @@ module.exports = {
         /* new webpack.LoaderOptionsPlugin({
              //minimize: true
          }),*/
-        /*new webpack.LoaderOptionsPlugin({
+       /* new webpack.LoaderOptionsPlugin({
             test: /\.vue$/,
             options: {
                 vue: {
