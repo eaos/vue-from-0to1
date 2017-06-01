@@ -1,10 +1,11 @@
 // 引入必要的模块
-var express = require('express')
-var webpack = require('webpack')
-var config = require('./webpack.dev.config')
+var express = require('express');
+var webpack = require('webpack');
+var config  = require('./webpack.dev.config');
+var history = require('connect-history-api-fallback');
 
 // 创建一个express实例
-var app = express()
+var app = express();
 
 // 调用webpack并把配置传递过去
 var compiler = webpack(config)
@@ -25,6 +26,12 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler)
 app.use(devMiddleware)
 // 注册中间件
 app.use(hotMiddleware)
+
+app.use(history({
+    //rewrites: [{ from: /^\/.*$/, to: '/index.html' }],
+    disableDotRule: true,
+    verbose: true
+}));
 
 // 监听 8889端口，开启服务器
 app.listen(8889, function (err) {

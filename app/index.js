@@ -12,6 +12,7 @@ Vue.prototype.permission = (window.sessionStorage.getItem("permission")).split("
 import routes from '../src/config/routes'
 const router = new VueRouter({
    // linkActiveClass: 'active',/*设置当前链接的class*/
+    mode: 'history',
     routes: routes
 });
 
