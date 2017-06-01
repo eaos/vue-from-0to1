@@ -1,0 +1,77 @@
+/*
+Error: Undefined mixin 'background-size'.
+        on line 18 of D:/soft/wamp/www/some/src/assets/sass/include/base.scss, in `background-size'
+        from line 18 of D:/soft/wamp/www/some/src/assets/sass/include/base.scss
+
+13: 	@media only screen and ( min-width: $min ) and ( max-width: $max ) {
+14: 		@content;
+15: 	}
+16: }
+17: @mixin clearfix { &:after { content:"."; display:block; height:0; clear:both; visibility:hidden;} }
+18: %background-size-100p{ @include background-size(100% 100%);}
+19: %translate-centerX-centerY{ @include transform(translate(-50%, -50%) translateZ(0));}
+20: %translate-centerX{@include transform(translate(-50%, 0) translateZ(0));}
+21: %translate-centerY{ @include transform(translate(0, -50%) translateZ(0));}
+22: %rotate--45{ @include transform(rotate(-45deg) translateZ(0));}
+23: %rotate-45{ @include transform(rotate(45deg) translateZ(0));}
+
+Backtrace:
+D:/soft/wamp/www/some/src/assets/sass/include/base.scss:18:in `background-size'
+D:/soft/wamp/www/some/src/assets/sass/include/base.scss:18
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:98:in `with_mixin'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:336:in `visit_mixin'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `map'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:157:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:8:in `visit'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:368:in `_render_with_sourcemap'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/engine.rb:285:in `render_with_sourcemap'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:490:in `update_stylesheet'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:209:in `each'
+D:/soft/Koala/rubygems/gems/sass-3.4.9/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/sass_compiler.rb:40:in `compile!'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/commands/update_project.rb:49:in `perform'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/commands/base.rb:18:in `execute'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/commands/project_base.rb:19:in `execute'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/lib/compass/exec/sub_command_ui.rb:15:in `run!'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/bin/compass:30:in `block in <top (required)>'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/bin/compass:44:in `call'
+D:/soft/Koala/rubygems/gems/compass-1.0.1/bin/compass:44:in `<top (required)>'
+D:/soft/Koala/bin/compass:18:in `load'
+D:/soft/Koala/bin/compass:18:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined mixin 'background-size'.\A         on line 18 of D:/soft/wamp/www/some/src/assets/sass/include/base.scss, in `background-size'\A         from line 18 of D:/soft/wamp/www/some/src/assets/sass/include/base.scss\A \A 13: 	@media only screen and ( min-width: $min ) and ( max-width: $max ) {\A 14: 		@content;\A 15: 	}\A 16: }\A 17: @mixin clearfix { &:after { content:\".\"; display:block; height:0; clear:both; visibility:hidden;} }\A 18: %background-size-100p{ @include background-size(100% 100%);}\A 19: %translate-centerX-centerY{ @include transform(translate(-50%, -50%) translateZ(0));}\A 20: %translate-centerX{@include transform(translate(-50%, 0) translateZ(0));}\A 21: %translate-centerY{ @include transform(translate(0, -50%) translateZ(0));}\A 22: %rotate--45{ @include transform(rotate(-45deg) translateZ(0));}\A 23: %rotate-45{ @include transform(rotate(45deg) translateZ(0));}"; }

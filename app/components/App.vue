@@ -45,5 +45,5 @@
 </script>
 <style>
 	.container{ background: #f5f5f5;}
-	.wrap{ font-size: 1rem;}
+	.container ul{ color: #999; background: #f5f5f5;}
 </style>

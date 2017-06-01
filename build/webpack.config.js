@@ -2,8 +2,11 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 var webpack = require('webpack');
 //console.log(__dirname);
+var  env = process.env.NODE_ENV;
+process.noDeprecation = true;
 
 module.exports = {
     //devtool: 'source-map',
@@ -35,11 +38,12 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: 'css-loader',
+                        'css': ExtractTextPlugin.extract({
+                            use: [{ loader: 'css-loader', options: { minimize: true, sourceMap: true } }],
                             fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
                         })
-                    }
+                    },
+                    sourceMap:true
                 }
             },
             {
@@ -117,6 +121,11 @@ module.exports = {
             }
         }),*/
         new ExtractTextPlugin({ filename:'app.css?[hash]',allChunks: true }),/*{ filename:'app.css?[hash]',allChunks: true }*/
+        new OptimizeCSSPlugin({
+            cssProcessorOptions: {
+                safe: true
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
             //sourceMap: true,
             compress: {

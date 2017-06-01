@@ -6,9 +6,9 @@
 .nav [class$="active"]{ color:$main-color !important; background: #fff} /*class属性以active结尾*/
 .footer{ text-align: center;/* margin-top: 10px; background: url(../images/logo.png);*/}
 .tree{
-  ul{ margin-left: 30px; padding-left: 0;}
+  ul{ margin-left: 30px; padding-left: 0; color: #666;}
 }
-.box-center-v{ border-radius:$border-radius-small; box-shadow: 0 0 10px rgba(0,0,0,.3); text-shadow: 0 0 1px rgba(0,0,0,.3); user-select: none;}
+.box-center-v{ border-radius:$border-radius-small; box-shadow: 0 0 10px rgba(0,0,0,.3); text-shadow: 0 0 1px rgba(0,0,0,.3); user-select: none; transform: scale(0.3);}
 
 /*flex上下固定，中间自动填满的布局*/
 html,body{height:100%;}

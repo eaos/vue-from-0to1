@@ -5,6 +5,7 @@ var webpack = require('webpack');
 // 引入基本配置
 var config = require('./webpack.config');
 
+config.devtool = 'source-map';
 config.output.publicPath = '/';
 config.plugins = [
     new webpack.ProvidePlugin({/*导出为全局变量*/
