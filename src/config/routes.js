@@ -1,11 +1,9 @@
-import App from '../../app/components/App';
-import foo_Posts from '../../app/components/fooPosts';
+//import App from '../../app/components/App';
 
 /*Foo模块路由和子页面*/
 const Foo = { template: '<div><router-view></router-view></div>'};
 const Foo_Index = { template: '<div>foo_Index</div>'};
 const Foo_Profile = { template: '<div>foo_Profile</div>'};
-const Foo_Posts = foo_Posts;
 
 /*Bar模块路由和子页面*/
 const Bar = { template: '<div><router-view></router-view></div>'};
@@ -15,6 +13,13 @@ const Bar_Posts = { template: '<div>bar_Posts</div>'};
 
 const Page403 = { template: '<div>403 无权限访问此页面！</div>'};
 const Page404 = { template: '<div>404 找不到页面！</div>'};
+
+/*异步路由组建*/
+const App = r => require.ensure([], () => r(require('../../app/components/App')), 'group-app');
+const Foo_Posts = r => require.ensure([], () => r(require('../../app/components/fooPosts')), 'group-fooPost');
+const ok1 = r => require.ensure([], () => r(require('../../app/components/ok1.vue')), 'group-ok1');
+const ok2 = r => require.ensure([], () => r(require('../../app/components/ok2.vue')), 'group-ok2');
+const ok3 = r => require.ensure([], () => r(require('../../app/components/ok3.vue')), 'group-ok3');
 
 /*嵌套路由*/
 const routes = [
@@ -50,6 +55,21 @@ const routes = [
             { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"Bar 用户登录",permission:"custom"} }
         ],
         meta:{breadcrumbList: [ { label: '用户'}],title:"bar 用户",permission:"custom"}
+    },
+    {
+        path: '/ok1',
+        component:ok1,
+        meta:{breadcrumbList: [ { label: 'ok1'}],title:"ok1 路由",permission:"custom"}
+    },
+    {
+        path: '/ok2',
+        component:ok2,
+        meta:{breadcrumbList: [ { label: 'ok2'}],title:"ok2 路由",permission:"custom"}
+    },
+    {
+        path: '/ok3',
+        component:ok3,
+        meta:{breadcrumbList: [ { label: 'ok3'}],title:"ok3 路由",permission:"custom"}
     },
     {
         name:"403",

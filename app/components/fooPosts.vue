@@ -18,7 +18,7 @@
 </template>
 <script>
     import Vue from 'vue';
-    //import validForm from '../../../../src/validform';
+    //import validForm from '../../src/validform';
     import valid from '../../src/directives/validform';
     Vue.directive('valid',valid);
     export default {
