@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-	<h2 class="text-center">欢迎界面</h2>
+	<h2 class="text-center">欢迎界面88887687987987888</h2>
 	<h3>父组件里面的text:<input type="text" v-model="text">{{text}}</h3>
 	<fav-list v-bind:mm="text" v-on:mchange="mchangeFromChild"></fav-list>
 	<a @click="changePermission()" class="btn btn-primary">权限添加</a>
