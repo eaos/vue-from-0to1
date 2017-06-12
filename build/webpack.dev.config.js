@@ -53,5 +53,6 @@ Object.keys(config.entry).forEach(function (name, i) {
     //console.log(name);
     config.entry[name] = [path.resolve(__dirname, '../build/dev-client')].concat(config.entry[name])
 });
+config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
 module.exports = config;
