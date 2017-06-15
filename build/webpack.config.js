@@ -39,7 +39,7 @@ module.exports = {
                 options: {
                     loaders: {
                         'css': ExtractTextPlugin.extract({
-                            use: [{ loader: 'css-loader', options: { minimize: true, sourceMap: true } }],
+                            use: [{ loader: 'css-loader', options: { minimize: true, sourceMap: true } },{ loader: 'sass-loader', options: { minimize: true, sourceMap: true } }],
                             fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
                         })
                     },
