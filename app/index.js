@@ -13,6 +13,7 @@ import routes from '../src/config/routes'
 const router = new VueRouter({
    // linkActiveClass: 'active',/*设置当前链接的class*/
     //mode: 'history',
+    //saveScrollPosition: true, //记住页面的滚动位置 html5模式适用
     routes: routes
 });
 

@@ -17,9 +17,21 @@ const Page404 = { template: '<div>404 找不到页面！</div>'};
 /*异步路由组建*/
 const App = r => require.ensure([], () => r(require('../../app/components/App')), 'group-app');
 const Foo_Posts = r => require.ensure([], () => r(require('../../app/components/fooPosts')), 'group-fooPost');
-const ok1 = r => require.ensure([], () => r(require('../../app/components/ok1.vue')), 'group-ok1');
+//const ok1 = r => require.ensure([], () => r(require('../../app/components/ok1.vue')), 'group-ok1');
 const ok2 = r => require.ensure([], () => r(require('../../app/components/ok2.vue')), 'group-ok2');
 const ok3 = r => require.ensure([], () => r(require('../../app/components/ok3.vue')), 'group-ok3');
+
+/*正常写法*/
+const ok1 = function(resolve){
+    //console.log(resolve);
+    require.ensure(
+        [],
+        function(){
+            resolve(require('../../app/components/ok1.vue'))
+        },
+        'group-ok1'
+    )
+};
 
 /*嵌套路由*/
 const routes = [

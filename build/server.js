@@ -39,11 +39,11 @@ app.use(devMiddleware)
 // 注册中间件
 app.use(hotMiddleware)
 
-app.use(history({
-    //rewrites: [{ from: /^\/.*$/, to: '/index.html' }],
+/*app.use(history({
+    rewrites: [{ from: /^\/.*$/, to: '/index.html' }],
     disableDotRule: true,
     verbose: true
-}));
+}));*/
 
 // 监听 8889端口，开启服务器
 app.listen(8889, function (err) {
