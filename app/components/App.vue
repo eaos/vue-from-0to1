@@ -10,7 +10,8 @@
 	<div class="box-center-v" style="height: 100px; width:200px; border: 1px solid #ddd;">
 		<span>center</span>
 	</div>
-	<router-link to="/ok1">Go to Ok1</router-link>
+	<router-link to="/ok1" class="btn btn-block btn-default">Go to Ok1</router-link>
+	<router-link to="/ok2" class="btn btn-block btn-default">Go to Ok1</router-link>
 </div>
 </template>
 <script>

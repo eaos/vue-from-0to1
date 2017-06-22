@@ -2,11 +2,11 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 var webpack = require('webpack');
 //console.log(__dirname);
 var  env = process.env.NODE_ENV;
-process.noDeprecation = true;
+//process.noDeprecation = true;
 
 module.exports = {
     //devtool: 'source-map',
