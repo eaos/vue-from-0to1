@@ -34,3 +34,33 @@ html,body{height:100%;}
   overflow:auto;/* winphone8和android4+ */
   -webkit-overflow-scrolling: touch; /* ios5+ */
 }
+
+.my-spinner {
+  background-color: rgba(0, 0, 0, 0);
+  border:3px solid rgba(29, 149, 130, 0.8);
+  opacity: .9;
+  display: inline-block;
+  border-left: 3px solid rgba(0, 0, 0, 0);
+  border-right:3px solid rgba(0, 0, 0, 0);
+  border-radius: 50px;
+  box-shadow: 0 0 15px rgba(29, 149, 130, 0.8);
+  width:30px; height:30px;
+  -webkit-animation: spin 1s infinite 0s linear;
+  animation: spin 1s infinite 0s linear;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0%{
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

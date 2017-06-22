@@ -7,10 +7,10 @@
 			</ul>
 		</div>
 		<div id="pullDown" class="pull-bar">
-			<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+			<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新</span>
 		</div>
 		<div id="pullUp" class="pull-bar">
-			<span class="pullUpIcon"></span><span class="pullUpLabel">上拉刷新...</span>
+			<span class="pullUpIcon"></span><span class="pullUpLabel">上拉刷新</span>
 		</div>
 	</div>
 </div>
@@ -108,7 +108,7 @@
 		font-size: 14px;
 	}
 
-	.pull-bar{ height:52px; line-height: 52px; text-align: center; width: 100%;}
+	.pull-bar{ height:42px; line-height:42px; text-align: center; width: 100%;}
 	#pullDown{ position: absolute; top:0; left: 0;}
 	#pullDown.loading{ z-index:2;}
 
