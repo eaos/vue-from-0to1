@@ -30,8 +30,11 @@ const VIScroll = {
 
             },
             inserted: function(el, binding,vnode, oldVnode){
+
+
                 setTimeout(()=> {
                     isc.refresh();
+                    //isc.scrollTo(0,52,1000);
                     var pullDown = $("#pullDown");
                     var pullUp = $("#pullUp");
 
@@ -40,12 +43,17 @@ const VIScroll = {
                         console.log(parseInt(this.y))
                         if(this.y>40){
                             pullDown.addClass('flip');
-                            pullDown.html('松开加载更多!');
+                            pullDown.find(".pullDownLabel").html('松开加载更多');
                             $(el).addClass("flip-loading");
+                        }else if(this.y<40&&this.y>0){
+                            $(el).removeClass("flip-loading");
+                            pullDown.removeClass('flip');
+                            pullDown.find(".pullDownLabel").html('下拉刷新');
                         }
+
                         if(this.y<this.maxScrollY-40){
                             pullUp.addClass('flip');
-                            pullUp.html('松开加载更多!');
+                            pullUp.html('松开加载更多');
                             $(el).addClass("flip-loading");
                         }
                     });
@@ -53,18 +61,30 @@ const VIScroll = {
                     /*滑动结束加载数据，模拟加载完成之后隐藏loading,初始化dom*/
                     isc.on('scrollEnd', function () {
                         if($(el).hasClass("flip-loading")&&pullDown.hasClass("loading")){
-                            binding["value"]["func"](function(){
+                            binding["value"]["func"](function(t){
+                                console.log(t);
                                 setTimeout(function(){
                                     $(el).removeClass("flip-loading");
                                     pullDown.removeClass('loading');
-                                    pullDown.html('<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新</span>');
+                                    //$(".scroller").removeClass("scroll-loading");
+                                    $(".scroller").css({
+                                        "transition-duration":"0.5s",
+                                        "-webkit-transform":"translate(0px, 0px)"
+                                    });
+                                    pullDown.html('<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>');
                                     console.log("end");
+                                    setTimeout(function(){
+                                        $(".scroller").css({
+                                            "transition-duration":"0s",
+                                        });
+                                    },500);
                                     //isc.refresh();
                                 },1000);
                             },'pullDown');
                         }
                         if($(el).hasClass("flip-loading")&&pullUp.hasClass("loading")){
-                            binding["value"]["func"](function(){
+                            binding["value"]["func"](function(t){
+                                console.log(t);
                                 setTimeout(function(){
                                     $(el).removeClass("flip-loading");
                                     pullUp.removeClass('loading');
@@ -78,17 +98,20 @@ const VIScroll = {
 
                     /*监听原生事件松开手指时执行loading效果*/
                     $(el).on("touchend",function(e){
-                        console.log("eee");
+                        console.log("touchend");
                         if($(el).hasClass("flip-loading")&&pullDown.hasClass("flip")){
+                            //$(".scroller").addClass("scroll-loading");
+                            $(".scroller").css({
+                                "-webkit-transform":"translate(0px, 52px)"
+                            });
                             pullDown.removeClass('flip').addClass('loading');
-                            pullDown.html('<span class="my-spinner"></span>');
-                            //isc.scrollTo(0,0,1000);
+                            pullDown.html('<span class="pullDownIcon"><span class="my-spinner"></span></span> <span class="pullUpLabel">数据加载中</span>');
+                            //isc.scrollTo(0,52,1000);
                         }
                         if($(el).hasClass("flip-loading")&&pullUp.hasClass("flip")){
                             pullUp.removeClass('flip').addClass('loading');
                             pullUp.html('<span class="my-spinner"></span>');
                         }
-
                     });
 
 
@@ -98,6 +121,7 @@ const VIScroll = {
                 // 将scroll绑定到新的vnode上
                 //vnode.scroll = oldVnode.scroll;
                 // 使用settimeout让refresh跳到事件流结尾，保证refresh时数据已经更新完毕
+                console.log("update");
                 setTimeout(()=> {
                     isc.refresh();
                 }, 0)

@@ -7,7 +7,7 @@
 			</ul>
 		</div>
 		<div id="pullDown" class="pull-bar">
-			<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新</span>
+			<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>
 		</div>
 		<div id="pullUp" class="pull-bar">
 			<span class="pullUpIcon"></span><span class="pullUpLabel">上拉刷新</span>
@@ -25,7 +25,8 @@
                 lists:[
                     0,1,2,3,4,5,6,7,8,9,10,11,12,13,0,1,2,3,4,5,6,7,8,9,10,11,12,13
 				],
-				page:1,
+				pullDownPage:1,
+                pullUpPage:1,
                 scrollParam:{
                     //startY:-52,
                     probeType: 2,/*支持scroll*/
@@ -35,20 +36,37 @@
                     click: true,
                     preventDefault: true,
                     tap: true,
-                    //bounce: true,
+                    bounce: true,
                     disableTouch: false
 				}
 			}
         },
 		methods:{
-            loadData:function(f,flag){
-                console.log(this.page++,flag);
-               if(flag=="pullDown"){
-                   this.lists.unshift(16);
-			   }else{
-                   this.lists.push(17);
-			   }
-                f();
+            loadData:function(callback,flag){
+                var _this = this;
+				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致*/
+                _this.$http.get("/api/options.json").then(function(response){
+                    console.info(response);
+                    if(flag=="pullDown"){
+                        console.log(_this.pullDownPage++);
+                        _this.lists.unshift(flag+_this.pullDownPage);
+                    }else{
+                        console.log(_this.pullUpPage++);
+                        _this.lists.push(flag+_this.pullUpPage);
+                    }
+                    callback("数据请求完成");
+                },function(response){
+                    console.info(response);
+                    console.log("页面数据拉取失败");
+                    if(flag=="pullDown"){
+                        console.log(_this.pullDownPage++);
+                        _this.lists.unshift(flag+_this.pullDownPage);
+                    }else{
+                        console.log(_this.pullUpPage++);
+                        _this.lists.push(flag+_this.pullUpPage);
+                    }
+                    callback("数据请求完成");
+                });
 			}
 		}
     }
@@ -88,6 +106,7 @@
 		-ms-text-size-adjust: none;
 		-o-text-size-adjust: none;
 		text-size-adjust: none;
+		transition:transform 2s cubic-bezier(0.1, 0.57, 0.1, 1);
 	}
 
 	.scroller ul {
@@ -108,10 +127,18 @@
 		font-size: 14px;
 	}
 
-	.pull-bar{ height:42px; line-height:42px; text-align: center; width: 100%;}
+	.pullDownIcon{ transition:transform 1s ease 0s; display:block; height: 20px; width: 20px; text-align: center; line-height: 20px; width: 100%;}
+	.flip .pullDownIcon{
+		transform:rotate(180deg);
+	}
+
+	/*.scroll-loading{
+		transform:translate(0px, 52px) translateZ(0px) !important;
+	}*/
+
+	.pull-bar{ height:42px; text-align: center; width: 100%; padding-top: 10px;}
 	#pullDown{ position: absolute; top:0; left: 0;}
 	#pullDown.loading{ z-index:2;}
-
 	#pullUp{ position: absolute; bottom:0; left: 0;}
 	#pullUp.loading{ z-index:2;}
 </style>

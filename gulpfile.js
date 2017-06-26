@@ -16,6 +16,7 @@ gulp.task('minifyCss', function() {
         .pipe(gulp.dest('output/static'))       //输出到文件夹,不能具体到文件名不然会提示已存在
 });
 
+/*前缀 兼容性优化*/
 gulp.task('autoprefixer', function () {
     var postcss    = require('gulp-postcss');
     var sourcemaps = require('gulp-sourcemaps');
