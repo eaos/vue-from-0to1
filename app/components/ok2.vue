@@ -3,7 +3,7 @@
 	<div  class="wrapper" id="wrapper" v-iscroll="{'param':scrollParam,'func':loadData}">
 		<div class="scroller">
 			<ul>
-				<li v-for="item in lists">Pretty row {{item}}</li>
+				<li v-for="item in lists">{{item}}</li>
 			</ul>
 		</div>
 		<div id="pullDown" class="pull-bar">
@@ -41,31 +41,29 @@
 				}
 			}
         },
+        created(){
+            this.loadData();
+		},
 		methods:{
             loadData:function(callback,flag){
                 var _this = this;
 				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致*/
-                _this.$http.get("/api/options.json").then(function(response){
-                    console.info(response);
+                _this.$http.get("/api/options.json").then(function(res){
+                    console.info(res);
                     if(flag=="pullDown"){
                         console.log(_this.pullDownPage++);
-                        _this.lists.unshift(flag+_this.pullDownPage);
-                    }else{
+                        _this.lists.unshift(_this.pullDownPage+res.data.result.data[1]["title"]);
+                    }else if(flag=="pullUp"){
                         console.log(_this.pullUpPage++);
                         _this.lists.push(flag+_this.pullUpPage);
-                    }
-                    callback("数据请求完成");
-                },function(response){
-                    console.info(response);
+                    }else{
+                        _this.lists.unshift(res.data.result.data[0]["title"]);
+					}
+                    if(typeof callback == "function"){
+                        callback("数据请求完成");
+					}
+                },function(res){
                     console.log("页面数据拉取失败");
-                    if(flag=="pullDown"){
-                        console.log(_this.pullDownPage++);
-                        _this.lists.unshift(flag+_this.pullDownPage);
-                    }else{
-                        console.log(_this.pullUpPage++);
-                        _this.lists.push(flag+_this.pullUpPage);
-                    }
-                    callback("数据请求完成");
                 });
 			}
 		}
@@ -125,6 +123,7 @@
 		border-top: 1px solid #fff;
 		background-color: #fafafa;
 		font-size: 14px;
+		overflow: hidden;
 	}
 
 	.pullDownIcon{ transition:transform 1s ease 0s; display:block; height: 20px; width: 20px; text-align: center; line-height: 20px; width: 100%;}

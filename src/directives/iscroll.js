@@ -71,15 +71,15 @@ const VIScroll = {
                                         "transition-duration":"0.5s",
                                         "-webkit-transform":"translate(0px, 0px)"
                                     });
-                                    pullDown.html('<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>');
                                     console.log("end");
                                     setTimeout(function(){
                                         $(".scroller").css({
                                             "transition-duration":"0s",
                                         });
+                                        pullDown.html('<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>');
                                     },500);
                                     //isc.refresh();
-                                },1000);
+                                },200);
                             },'pullDown');
                         }
                         if($(el).hasClass("flip-loading")&&pullUp.hasClass("loading")){

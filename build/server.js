@@ -16,10 +16,10 @@ var app = express();
 app.use('/static',express.static(path.resolve(__dirname, '../src')));
 
 /*本地与后端联调跨域问题*/
-/*所有api重定向到http://192.168.19.122:8889/static,可以统一管理接口地址*/
+/*所有/api地址重定向到http://192.168.19.122:8889/static,可以统一管理接口地址*/
 var exampleProxy = proxy(
     {
-        target: 'http://192.168.19.122:8889',
+        target: 'http://127.0.0.1:8889',
         changeOrigin: true,
         pathRewrite: {
             '^/api': '/static'
