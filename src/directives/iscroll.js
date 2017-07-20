@@ -6,32 +6,19 @@ const VIScroll = {
             bind(el, binding, vnode) {
                 // 判断输入参数
                 let vtype = binding.value.param ? [].toString.call(binding.value.param) : undefined;
-
                 // 设置iscorll属性的参数
                 let iscrollOptions  = vtype === '[object Object]' ? binding.value.param : options;
-
                 // 阻止touchmove默认事件
                 el.addEventListener('touchmove', event => {
                     event.preventDefault();
-                })
+                });
 
                 // 使用vnode绑定iscroll是为了让iscroll对象能够夸状态传递，避免iscroll重复建立
                 // vnode.scroll = new IScroll(el, iscrollOptions);
                 isc = new IScroll(el, iscrollOptions);
 
-               /* isc.on("scrollCancel",function(){
-                    console.log("scrollCancel");
-                    if(this.y>50){
-                        //this.scrollY = 52;
-                        alert(this.scrollY);
-                        this.scrollTo(0,52,100);
-                    }
-                });*/
-
             },
             inserted: function(el, binding,vnode, oldVnode){
-
-
                 setTimeout(()=> {
                     isc.refresh();
                     //isc.scrollTo(0,52,1000);
@@ -40,7 +27,7 @@ const VIScroll = {
 
                     /*滑动过程到一定距离显示文字提示*/
                     isc.on('scroll', function () {
-                        console.log(parseInt(this.y))
+                        //console.log(parseInt(this.y))
                         if(this.y>40){
                             pullDown.addClass('flip');
                             pullDown.find(".pullDownLabel").html('松开加载更多');
@@ -115,7 +102,7 @@ const VIScroll = {
                     });
 
 
-                }, 0)
+                }, 0);/*这样就保证setTimeout里面的语句在某一代码段中最后执行*/
             },
             update(el, binding, vnode, oldVnode) {
                 // 将scroll绑定到新的vnode上
@@ -138,5 +125,4 @@ const VIScroll = {
         })
     }
 }
-
 export default VIScroll;

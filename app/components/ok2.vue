@@ -42,12 +42,14 @@
 			}
         },
         created(){
-            this.loadData();
+            this.loadData(function(txt){
+                console.log(txt);
+			});
 		},
 		methods:{
             loadData:function(callback,flag){
                 var _this = this;
-				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致*/
+				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致，static又可以映射到api上面，跟线上接口地址保持一直*/
                 _this.$http.get("/api/options.json").then(function(res){
                     console.info(res);
                     if(flag=="pullDown"){
