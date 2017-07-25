@@ -6,7 +6,6 @@ var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 var webpack = require('webpack');
 //console.log(__dirname);
 var  env = process.env.NODE_ENV;
-//process.noDeprecation = true;
 
 module.exports = {
     //devtool: 'source-map',

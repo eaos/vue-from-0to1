@@ -32,7 +32,7 @@ config.plugins = [
             }
         }
     }),*/
-    new ExtractTextPlugin({ filename:'app.css?[hash]',allChunks: true }),/*{ filename:'app.css?[hash]',allChunks: true }*/
+    new ExtractTextPlugin({ filename:'app.css?[hash]',allChunks: true }),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: path.resolve(__dirname, '../app/index.html'),
@@ -53,6 +53,6 @@ Object.keys(config.entry).forEach(function (name, i) {
     //console.log(name);
     config.entry[name] = [path.resolve(__dirname, '../build/dev-client')].concat(config.entry[name])
 });
-config.plugins.push(new webpack.HotModuleReplacementPlugin())
+config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 module.exports = config;

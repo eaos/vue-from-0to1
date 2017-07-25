@@ -23,7 +23,6 @@ const ok3 = r => require.ensure([], () => r(require('../../app/components/ok3.vu
 
 /*正常写法*/
 const ok1 = function(resolve){
-    //console.log(resolve);
     require.ensure(
         [],
         function(){
