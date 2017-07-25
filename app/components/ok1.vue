@@ -1,7 +1,10 @@
 <template>
 <div class="container">
 	<h1>ok1 {{num}}</h1>
-	<ok-inner></ok-inner>
+	<ok-inner>
+		<h3 slot="soltName">soltName Here Here will be slot in the slot</h3>
+		<h4 slot="slot2">solt2 will be slot here</h4>
+	</ok-inner>
 	<input type="text" class="form-control" v-model="searchKey"/>
 	<h3>Lists</h3>
 	<div v-for="(item, index) in lists">
