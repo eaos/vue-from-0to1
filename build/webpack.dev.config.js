@@ -50,9 +50,8 @@ config.plugins = [
 
 // 动态向入口配置中注入 webpack-hot-middleware/client (组件改变自动刷新页面)
 Object.keys(config.entry).forEach(function (name, i) {
-    //console.log(name);
+    //console.log(config.entry[name]);
     config.entry[name] = [path.resolve(__dirname, '../build/dev-client')].concat(config.entry[name])
 });
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
-
 module.exports = config;

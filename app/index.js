@@ -9,15 +9,24 @@ Vue.use(VueRouter);
 window.sessionStorage.setItem("permission",["edit","delete",'custom','haha']);
 Vue.prototype.permission = (window.sessionStorage.getItem("permission")).split(",");
 
+/*初始化路由*/
 import routes from '../src/config/routes'
 const router = new VueRouter({
    // linkActiveClass: 'active',/*设置当前链接的class*/
     //mode: 'history',
     //saveScrollPosition: true, //记住页面的滚动位置 html5模式适用
+    scrollBehavior :function(to, from, savedPosition) {
+        console.log(savedPosition);
+        if(savedPosition) {
+            setTimeout(() => {
+                window.scrollTo(savedPosition.x, savedPosition.y)
+            }, 200)
+        }
+    },
     routes: routes
 });
 
-/*进入页面之前*/
+/*路由进入页面之前*/
 router.beforeEach(function(to, from, next){
     /*可以在这里进行权限控制*/
     console.log(Vue.prototype.permission);
@@ -30,8 +39,9 @@ router.beforeEach(function(to, from, next){
     window.scrollTo(0,0);
 });
 
-/*进入页面之后*/
-router.afterEach(function (transition) {
+/*路由进入页面之后*/
+router.afterEach((transition) => {
+    /*设置页面title*/
     console.log(transition.meta.title);
     window.document.title = transition.meta.title;
 });

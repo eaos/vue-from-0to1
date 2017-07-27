@@ -2,7 +2,7 @@
 <div class="container">
 	<h1>ok1 {{num}}</h1>
 	<ok-inner>
-		<h3 slot="soltName">soltName Here Here will be slot in the slot</h3>
+		<h3 slot="slotName">soltName Here Here will be slot in the slot</h3>
 		<h4 slot="slot2">solt2 will be slot here</h4>
 	</ok-inner>
 	<input type="text" class="form-control" v-model="searchKey"/>
@@ -51,8 +51,8 @@
                     } else {
                         arrB.push(val)
                     }
-
                 });
+
                 return [arrA, arrB]
             },
             copyArr : function (arr){

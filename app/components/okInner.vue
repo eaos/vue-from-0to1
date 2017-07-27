@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-	<slot name="soltName"></slot>
+	<slot name="slotName"></slot>
 	<h1>okInner 8989fdsgdf</h1>
 	<form id="form">
 		<p><input type="text" id="mobile" name="mobile"></p>
