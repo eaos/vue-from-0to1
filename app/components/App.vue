@@ -7,6 +7,9 @@
 	<ul class="tree">
 		<tree v-for="item in info.list" v-bind:model="item" v-bind:key="item.onlyId"></tree>
 	</ul>
+	<pre>
+		{{info.list}}
+	</pre>
 	<div class="box-center-v" style="height: 100px; width:200px; border: 1px solid #ddd;">
 		<span>center</span>
 	</div>
@@ -28,6 +31,19 @@
 				text:"Hello world!",/*子组件接收到的数据不能跟父组件双向绑定*/
                 info:{"list":[{"onlyId":"patientManage","name":"患者库","item":[{"onlyId":"patientAccount","name":"患者管理","item":[{"onlyId":"editPatient","name":"修改患者资料","item":null,"checked":true},{"onlyId":"addPatient","name":"增加患者","item":null,"checked":true},{"onlyId":"deletePatient","name":"删除患者","item":null,"checked":true},{"onlyId":"viewPatient","name":"查看患者资料","item":null,"checked":true}],"checked":true}],"checked":true}]}
             }
+        },
+        beforeRouteEnter:function(to,from,next){
+            console.log("beforeRouteEnter");
+			/*this不能访问实例对象，只能通过next的vm*/
+            next(function(vm){
+                vm.info.list[0]["name"]="xxx";
+			});
+        },
+        created:function(){
+            console.log("created");
+        },
+        mounted:function(){
+            console.log("mounted");
         },
 		methods:{
             changePermission:function(){

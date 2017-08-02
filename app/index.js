@@ -1,8 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import axios from 'axios'
+import VueResource from 'vue-resource';
+/*import axios from 'axios'
 import VueAxios from 'vue-axios'
-Vue.use(VueAxios,axios);
+Vue.use(VueAxios,axios);*/
+Vue.use(VueResource);
 Vue.use(VueRouter);
 
 /*模拟设置权限 保存到sessionStorage*/

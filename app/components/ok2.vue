@@ -41,10 +41,27 @@
 				}
 			}
         },
+		beforeRouteEnter:function(to,from,next){
+            /*数据请求完成之后再跳转页面的处理*/
+            console.log(Promise);/*ES6自带promise*/
+			/*promise实现多个接口数据请求完成之后，同时取数据*/
+            Promise.all([Vue.http.get("/api/options.json"),Vue.http.get("/api/options2.json")]).then(
+                function(res){
+                    console.log(res);
+                    /*跳转下一页*/
+                    next(vm=>{
+                        vm.lists.unshift(res[0].data.result.data[1]["title"]);
+					})
+				},
+				function(error){
+                    console.log(error);
+				}
+			);
+		},
         created(){
-            this.loadData(function(txt){
+            /*this.loadData(function(txt){
                 console.log(txt);
-			});
+			});*/
 		},
 		methods:{
             loadData:function(callback,flag){
