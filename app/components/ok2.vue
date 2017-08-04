@@ -55,6 +55,7 @@
 				},
 				function(error){
                     console.log(error);
+                    alert("数据失败不能进入页面！");
 				}
 			);
 		},

@@ -6,7 +6,6 @@
 	</div>
 	<ul v-show="open" v-if="hasChild">
 		<treeSelf v-for="item in model.item" v-bind:model="item" v-bind:key="item.onlyId"></treeSelf>
-		<treeSelf v-for="item in model.item" v-bind:model="item" ></treeSelf>
 	</ul>
 </li>
 </template>

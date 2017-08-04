@@ -11,13 +11,23 @@ module.exports = {
     devtool:"source-map",
     entry:{
         index:[path.resolve(__dirname,"../app/index.js")],
-        test:[path.resolve(__dirname,'../arc/t.js'),path.resolve(__dirname,"../src/s.js"),path.resolve(__dirname, '../src/validform.js'),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
+        test:[path.resolve(__dirname,'../src/t.js'),path.resolve(__dirname,"../src/s.js"),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
         vendors:['vue','vue-router','jquery']
     },
     output:{
         path:path.resolve(__dirname,'../output/static'),
         publicPath:'static/',
         filename:'[name].js?[hash]'
+    },
+    entry:{
+        index:[path.resolve(__dirname,"../app/index.js")],
+        text:[path.resolve(__dirname,"../src/t.js"),path.resolve(__dirname,"../src/s.js"),path.resolve(__dirname,"../src/assets/bootstrap/js/bootstrap.min.js")],
+        vendor:["vue",'vue-router','jquery']
+    },
+    output:{
+        path:path.resolve(__dirname,"../output/static"),
+        publicPath:"static/",
+        filename:"[name].js?[hash]"
     }
 };
 

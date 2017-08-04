@@ -12,11 +12,9 @@ const VIScroll = {
                 el.addEventListener('touchmove', event => {
                     event.preventDefault();
                 });
-
                 // 使用vnode绑定iscroll是为了让iscroll对象能够夸状态传递，避免iscroll重复建立
                 // vnode.scroll = new IScroll(el, iscrollOptions);
                 isc = new IScroll(el, iscrollOptions);
-
             },
             inserted: function(el, binding,vnode, oldVnode){
                 setTimeout(()=> {
@@ -101,17 +99,17 @@ const VIScroll = {
                         }
                     });
 
-
                 }, 0);/*这样就保证setTimeout里面的语句在某一代码段中最后执行*/
             },
             update(el, binding, vnode, oldVnode) {
                 // 将scroll绑定到新的vnode上
                 //vnode.scroll = oldVnode.scroll;
                 // 使用settimeout让refresh跳到事件流结尾，保证refresh时数据已经更新完毕
-                console.log("update");
-                setTimeout(()=> {
+                setTimeout(()=>{
                     isc.refresh();
-                }, 0)
+                    console.log("refresh");
+                }, 0);/*保证在最后执行*/
+                console.log("update");
             },
             componentUpdated: function(el, binding){},
             unbind(el, binding, vnode, oldVnode) {
@@ -122,7 +120,7 @@ const VIScroll = {
                 isc.destroy();
                 isc = null;
             }
-        })
+        });
     }
 }
 export default VIScroll;
