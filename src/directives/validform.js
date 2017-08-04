@@ -1,4 +1,4 @@
-import Validform from '../../src/validform.js';
+import Validform from '../../src/validform';
 const valid = {
     install:function(Vue){
         let demo = null;
