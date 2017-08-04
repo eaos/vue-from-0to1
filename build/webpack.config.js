@@ -8,35 +8,11 @@ var  env = process.env.NODE_ENV;
 //console.log(__dirname);
 
 module.exports = {
-    devtool:"source-map",
-    entry:{
-        index:[path.resolve(__dirname,"../app/index.js")],
-        test:[path.resolve(__dirname,'../src/t.js'),path.resolve(__dirname,"../src/s.js"),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
-        vendors:['vue','vue-router','jquery']
-    },
-    output:{
-        path:path.resolve(__dirname,'../output/static'),
-        publicPath:'static/',
-        filename:'[name].js?[hash]'
-    },
-    entry:{
-        index:[path.resolve(__dirname,"../app/index.js")],
-        text:[path.resolve(__dirname,"../src/t.js"),path.resolve(__dirname,"../src/s.js"),path.resolve(__dirname,"../src/assets/bootstrap/js/bootstrap.min.js")],
-        vendor:["vue",'vue-router','jquery']
-    },
-    output:{
-        path:path.resolve(__dirname,"../output/static"),
-        publicPath:"static/",
-        filename:"[name].js?[hash]"
-    }
-};
-
-module.exports = {
     //devtool: 'source-map',
     //入口文件，path.resolve()方法，可以结合我们给定的两个参数最后生成绝对路径，最终指向的就是我们的index.js文件
     entry: {
 		index:[path.resolve(__dirname, '../app/index.js')],//'webpack-hot-middleware/client',
-        test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/validform.js'),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
+        test:[path.resolve(__dirname, '../src/t.js'),path.resolve(__dirname, '../src/s.js'),path.resolve(__dirname, '../src/assets/bootstrap/js/bootstrap.min.js')],
         vendors:['vue','vue-router','jquery'] /*需要被提取为公共模块的群组*/
 	},
     // 输出配置
