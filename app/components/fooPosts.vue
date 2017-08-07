@@ -44,7 +44,7 @@
         },
         created:function(){//created||beforeRouteEnter 一般在这里进行页面载入之前预加载数据
 		 console.log("created",this.info);
-            this.$http.post("api/lists",{"code":"GetScore","msg":"","id":"123"}).then(function(data){
+            this.$http.post("api/lists",{"code":"getList","page":1}).then(function(data){
                 console.info(data);
             },function(response){
                 console.info(response);

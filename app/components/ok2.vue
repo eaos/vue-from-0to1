@@ -45,12 +45,12 @@
             /*数据请求完成之后再跳转页面的处理*/
             console.log(Promise);/*ES6自带promise*/
 			/*promise实现多个接口数据请求完成之后，同时取数据*/
-            Promise.all([Vue.http.get("/api/options.json"),Vue.http.get("/api/options2.json")]).then(
+            Promise.all([Vue.http.post("/api/options",{"code":"getOption"}),Vue.http.post("/api/lists",{"code":"getList","page":1})]).then(
                 function(res){
                     console.log(res);
                     /*跳转下一页*/
                     next(vm=>{
-                        vm.lists.unshift(res[0].data.result.data[1]["title"]);
+                        vm.lists.unshift(res[0].data.list[1]["title"]);
 					})
 				},
 				function(error){
@@ -68,16 +68,16 @@
             loadData:function(callback,flag){
                 var _this = this;
 				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致，static又可以映射到api上面，跟线上接口地址保持一直*/
-                _this.$http.get("/api/options.json").then(function(res){
+                _this.$http.post("/api/options",{"code":"getOption","page":_this.pullDownPage}).then(function(res){
                     console.info(res);
                     if(flag=="pullDown"){
                         console.log(_this.pullDownPage++);
-                        _this.lists.unshift(_this.pullDownPage+res.data.result.data[1]["title"]);
+                        _this.lists.unshift(_this.pullDownPage+res.data.list[1]["title"]);
                     }else if(flag=="pullUp"){
                         console.log(_this.pullUpPage++);
                         _this.lists.push(flag+_this.pullUpPage);
                     }else{
-                        _this.lists.unshift(res.data.result.data[0]["title"]);
+                        _this.lists.unshift(res.data.list[0]["title"]);
 					}
                     if(typeof callback == "function"){
                         callback("数据请求完成");

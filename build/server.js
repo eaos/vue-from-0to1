@@ -19,11 +19,13 @@ app.use('/static',express.static(path.resolve(__dirname, '../src')));
 /*所有/api地址重定向到http://192.168.19.122:8889/static,可以统一管理接口地址*/
 var exampleProxy = proxy(
     {
-        target: 'http://127.0.0.1:8889',
+       /* target: 'http://127.0.0.1:8889',
         changeOrigin: true,
         pathRewrite: {
             '^/api': '/static'
-        }
+        }*/
+         target: 'http://localhost:6868/CodeIgniter-3.1.5',
+         changeOrigin: true,
     }
 );
 app.use('/api', exampleProxy);
