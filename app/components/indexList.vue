@@ -1,32 +1,30 @@
 <template>
-<div class="container">
-	<div  class="wrapper" id="wrapper" v-iscroll="{'param':scrollParam,'func':loadData}">
-		<div class="scroller">
-			<ul>
-				<li v-for="item in lists">{{item}}</li>
-			</ul>
-		</div>
-		<div id="pullDown" class="pull-bar">
-			<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>
-		</div>
-		<div id="pullUp" class="pull-bar">
-			<span class="pullUpIcon"></span><span class="pullUpLabel">上拉刷新</span>
+	<div class="container">
+		<div  class="wrapper" id="wrapper" v-iscroll="{'param':scrollParam,'func':loadData}">
+			<div class="scroller">
+				<div class="list-group" style="padding: 10px;">
+					<router-link :to="{name:'listDetail',params:{id:item.id}}" class="list-group-item" v-for="item in lists">{{item.title}} Cras justo odio</router-link>
+				</div>
+			</div>
+			<div id="pullDown" class="pull-bar">
+				<span class="pullDownIcon"><i class="glyphicon glyphicon-arrow-down"></i></span><span class="pullDownLabel">下拉刷新</span>
+			</div>
+			<div id="pullUp" class="pull-bar">
+				<span class="pullUpIcon"></span><span class="pullUpLabel">上拉刷新</span>
+			</div>
 		</div>
 	</div>
-</div>
 </template>
 <script>
-	import Vue from "vue";
+    import Vue from "vue";
+    import '../../src/assets/sass/style.scss';
     import iscroll from '../../src/directives/iscroll';
     Vue.use(iscroll);
     export default {
         data () {
             return {
-                lists:[
-                    0,1,2,3,4,5,6,7,8,9,10,11,12,13,0,1,2,3,4,5,6,7,8,9,10,11,12,13
-				],
-				pullDownPage:1,
-                pullUpPage:1,
+                lists:[],
+                pullUpPage:2,
                 scrollParam:{
                     //startY:-52,
                     probeType: 2,/*支持scroll*/
@@ -38,58 +36,63 @@
                     tap: true,
                     bounce: true,
                     disableTouch: false
-				}
-			}
+                }
+            }
         },
-		beforeRouteEnter:function(to,from,next){
-            /*数据请求完成之后再跳转页面的处理*/
+        beforeRouteEnter:function(to,from,next){
+			/*数据请求完成之后再跳转页面的处理*/
             console.log(Promise);/*ES6自带promise*/
 			/*promise实现多个接口数据请求完成之后，同时取数据*/
-            Promise.all([Vue.http.post("./api/options",{"code":"getOption"}),Vue.http.post("./api/lists",{"code":"getList","page":1})]).then(
+            Promise.all([Vue.http.post("./api/lists",{"code":"getList","page":1})]).then(
                 function(res){
                     console.log(res);
-                    /*跳转下一页*/
+					/*跳转下一页*/
                     next(vm=>{
-                        vm.lists.unshift(res[0].data.list[1]["title"]);
-					})
-				},
-				function(error){
+                        vm.lists = res[0].data.list;
+                    })
+                },
+                function(error){
                     console.log(error);
                     alert("数据失败不能进入页面！");
-				}
-			);
-		},
+                }
+            );
+        },
         created(){
-            /*this.loadData(function(txt){
-                console.log(txt);
-			});*/
-		},
-		methods:{
+			/*this.loadData(function(txt){
+			 console.log(txt);
+			 });*/
+        },
+        methods:{
             loadData:function(callback,flag){
                 var _this = this;
 				/*开发环境实际上是src目录下的options.json,服务器express使用的虚拟目录static,开放文件夹访问，跟打包之后的静态文件目录保持一致，static又可以映射到api上面，跟线上接口地址保持一直*/
-                _this.$http.post("./api/options",{"code":"getOption","page":_this.pullDownPage}).then(function(res){
-                    console.info(res);
-                    if(flag=="pullDown"){
-                        console.log(_this.pullDownPage++);
-                        _this.lists.unshift(_this.pullDownPage+res.data.list[1]["title"]);
-                    }else if(flag=="pullUp"){
-                        console.log(_this.pullUpPage++);
-                        _this.lists.push(flag+_this.pullUpPage);
-                    }else{
-                        _this.lists.unshift(res.data.list[0]["title"]);
-					}
-                    if(typeof callback == "function"){
-                        callback("数据请求完成");
-					}
-                },function(res){
-                    console.log("页面数据拉取失败");
-                });
-			}
-		}
+
+                if(flag=="pullDown"){
+                    _this.$http.post("./api/lists",{"code":"getList","page":1}).then(function(res){
+						_this.lists =  res.data.list;
+                        if(typeof callback == "function"){
+                            callback("数据请求完成");
+                        }
+                    },function(res){
+                        console.log("页面数据拉取失败");
+                    });
+                }else if(flag=="pullUp"){
+                    _this.$http.post("./api/lists",{"code":"getList","page":_this.pullUpPage}).then(function(res){
+                        _this.pullUpPage++;
+						_this.lists =  _this.lists.concat(res.data.list);
+                        if(typeof callback == "function"){
+                            callback("数据请求完成");
+                        }
+                    },function(res){
+                        console.log("页面数据拉取失败");
+                    });
+                }
+
+            }
+        }
     }
 </script>
-<style scoped>
+<style>
 	.wrapper {
 		position: absolute;
 		z-index:1;
@@ -98,7 +101,6 @@
 		right: 0;
 		left: 0;
 		width: 100%;
-		background: #ccc;
 		overflow: hidden;
 	}
 
@@ -155,7 +157,7 @@
 		transform:translate(0px, 52px) translateZ(0px) !important;
 	}*/
 
-	.pull-bar{ height:42px; text-align: center; width: 100%; padding-top: 10px;}
+	.pull-bar{ height:42px; text-align: center; width: 100%; padding-top: 10px; display: none;}
 	#pullDown{ position: absolute; top:0; left: 0;}
 	#pullDown.loading{ z-index:2;}
 	#pullUp{ position: absolute; bottom:0; left: 0;}

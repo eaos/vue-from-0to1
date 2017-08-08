@@ -15,11 +15,13 @@ const Page403 = { template: '<div>403 无权限访问此页面！</div>'};
 const Page404 = { template: '<div>404 找不到页面！</div>'};
 
 /*异步路由组建*/
-const App = r => require.ensure([], () => r(require('../../app/components/App')), 'group-app');
+const Index = r => require.ensure([], () => r(require('../../app/components/indexList.vue')), 'group-app');
 const Foo_Posts = r => require.ensure([], () => r(require('../../app/components/fooPosts')), 'group-fooPost');
 //const ok1 = r => require.ensure([], () => r(require('../../app/components/ok1.vue')), 'group-ok1');
 const ok2 = r => require.ensure([], () => r(require('../../app/components/ok2.vue')), 'group-ok2');
 const ok3 = r => require.ensure([], () => r(require('../../app/components/ok3.vue')), 'group-ok3');
+
+const Detail = r => require.ensure([], () => r(require('../../app/components/indexListDetail.vue')), 'group-detail');
 
 /*正常写法*/
 const ok1 = function(resolve){
@@ -37,7 +39,7 @@ const routes = [
     {
         name:"index",
         path: '/',
-        component: App,
+        component: Index,
         meta: {breadcrumbList:[ { label: 'App'}],permission:"custom",title:"首页"}
     },
     {   //name:"foo",/*有默认子路由(path为空)的话，父路由的name得去掉*/
@@ -66,6 +68,12 @@ const routes = [
             { name:"bar_posts",path: 'posts', component: Bar_Posts,meta: { breadcrumbList: [ { label: '用户登录'}],title:"Bar 用户登录",permission:"custom"} }
         ],
         meta:{breadcrumbList: [ { label: '用户'}],title:"bar 用户",permission:"custom"}
+    },
+    {
+        name:"listDetail",
+        path:'/detail/:id',
+        component:Detail,
+        meta:{breadcrumbList: [ { label: 'listDetail'}],title:"listDetail 详情页",permission:"custom"}
     },
     {
         path: '/ok1',

@@ -23,6 +23,10 @@ const VIScroll = {
                     var pullDown = $("#pullDown");
                     var pullUp = $("#pullUp");
 
+                    if($(".scroller").height()>=$(".wrapper").height()){
+                        $(".pull-bar").show();
+                    }
+
                     /*滑动过程到一定距离显示文字提示*/
                     isc.on('scroll', function () {
                         //console.log(parseInt(this.y))

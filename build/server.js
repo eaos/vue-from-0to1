@@ -24,7 +24,7 @@ var exampleProxy = proxy(
         pathRewrite: {
             '^/api': '/static'
         }*/
-         target: 'http://localhost:6868/CodeIgniter-3.1.5',
+         target: 'http://localhost:6868/vue-php',
          changeOrigin: true,
     }
 );

@@ -1,10 +1,10 @@
 import Validform from '../../src/validform';
 const valid = {
     install:function(Vue){
-        let demo = null;
+        let ins = null;
         Vue.directive("valid",{
             bind: function(el, binding){
-                demo = $(el).Validform({
+                ins = $(el).Validform({
                     tiptype:"4",
                     //ajaxPost:true,
                     showAllError:true,
@@ -18,16 +18,14 @@ const valid = {
                         }
                     }
                 });
-                console.log("指令=======Start");
-                console.log('bind:',binding);
             },
             inserted: function(el, binding){
-                console.log('insert:',binding.value);
+                console.log('insert');
             },
             update: function(el,binding,vnode,oldVnode){
                 el.focus();
-                console.log(demo);
-                /*demo.addRule([
+                console.log(ins);
+                /*ins.addRule([
                  {
                  ele:"#mobile",
                  ajaxurl:"../clinic/userManage/account/query-mobile?type=1"
@@ -47,11 +45,11 @@ const valid = {
                 });
             },
             componentUpdated: function(el, binding){
-                console.log('componentUpdated:',binding.name);
+                console.log('componentUpdated:');
             },
             unbind:function(el,binding){
-                console.log("unbind",binding);
-                demo = null;
+                console.log("unbind");
+                ins = null;
             }
         })
     }
