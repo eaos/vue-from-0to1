@@ -12,6 +12,8 @@
                 <router-view></router-view>
             </div>
             <app-footer></app-footer>
+            <top-progress ref="topProgress" color="#35b99f" :speed="350" error-color="#f80000"></top-progress>
+            <!--<div class="loading" v-show="showLoading"><span class="my-spinner"></span></div>-->
         </div>
     </body>
 </html>

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
+import topProgress from 'vue-top-progress'
 /*import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios,axios);*/
@@ -48,15 +49,30 @@ router.afterEach((transition) => {
     window.document.title = transition.meta.title;
 });
 
+Vue.http.interceptors.push((request, next) => {
+    //vm.showLoading = true;
+    console.log(vm.$refs);
+    vm.$refs.topProgress.start();
+    next((response) => {
+        //vm.showLoading = false;
+        vm.$refs.topProgress.done();
+        return response;
+    });
+});
+
 /*实例化Vue*/
 import appHeader from './components/appHeader'
 import appFooter from './components/appFooter'
 var vm = new Vue({
     el: '#app',
 	//render:rd=>rd(App),
+    data: {
+        showLoading: false
+    },
     router:router,
     components:{
         appHeader,
-        appFooter
+        appFooter,
+        topProgress
     }
 });

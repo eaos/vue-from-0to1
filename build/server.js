@@ -9,14 +9,14 @@ var proxy   = require('http-proxy-middleware');
 // 创建一个express实例
 var app = express();
 
-/*服务器允许访问的目录 静态资源*/
+/*服务器允许访问的目录 静态资源 开发服*/
 //console.log(path.resolve(__dirname, '../src'));
 //app.use('模拟路径',"要开放的路径");
 //app.use('/src',express.static(path.resolve(__dirname, '../src')));
 app.use('/static',express.static(path.resolve(__dirname, '../src')));
 
 /*本地与后端联调跨域问题*/
-/*所有/api地址重定向到http://192.168.19.122:8889/static,可以统一管理接口地址*/
+/*比如所有/api地址重定向到http://127.0.0.1:6868/vue-php,可以统一管理接口地址*/
 var exampleProxy = proxy(
     {
        /* target: 'http://127.0.0.1:8889',
@@ -24,7 +24,7 @@ var exampleProxy = proxy(
         pathRewrite: {
             '^/api': '/static'
         }*/
-         target: 'http://localhost:6868/vue-php',
+         target: 'http://127.0.0.1:6868/vue-php',
          changeOrigin: true,
     }
 );
