@@ -3,7 +3,7 @@
 		<div  class="wrapper" id="wrapper" v-iscroll="{'param':scrollParam,'func':loadData}">
 			<div class="scroller">
 				<div class="list-group" style="padding: 10px;">
-					<router-link :to="{name:'listDetail',params:{id:item.id}}" class="list-group-item" v-for="item in lists">{{item.title}} Cras justo odio</router-link>
+					<router-link :to="{name:'listDetail',params:{id:item.id}}" class="list-group-item" v-for="(item,idx) in lists" :key="idx">{{item.title}} Cras justo odio</router-link>
 				</div>
 			</div>
 			<div id="pullDown" class="pull-bar">
