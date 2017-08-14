@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import topProgress from 'vue-top-progress'
+import topProgress from 'vue-top-progress';
 /*import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios,axios);*/
